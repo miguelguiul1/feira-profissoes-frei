@@ -5,6 +5,7 @@ import { MediaPlaceholder } from "./media-placeholder";
 import cursoInformatica from "@/assets/curso-informatica-2.png.asset.json";
 import cursoIngles from "@/assets/curso-ingles.png.asset.json";
 import cursoEletromecanica from "@/assets/curso-eletromecanica.png.asset.json";
+import cursoAdministracao from "@/assets/curso-administracao.png.asset.json";
 
 const COURSES = [
   {
@@ -33,7 +34,7 @@ const COURSES = [
     description: "Estoques, RH, Logística, Marketing e Contabilidade.",
     hours: "1.000h",
     duration: "1 ano — segunda a sexta",
-    image: null,
+    image: cursoAdministracao.url,
   },
 ];
 
