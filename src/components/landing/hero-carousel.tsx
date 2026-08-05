@@ -128,7 +128,7 @@ export function HeroCarousel() {
                 </h2>
                 <div className="mt-6 grid gap-6 rounded-2xl bg-background p-6 shadow-soft sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
                   <img
-                    src={depoimentoRicardo.url}
+                    src={exAlunoRicardo.url}
                     alt="Retrato de Ricardo Hessel de Araújo, ex-aluno do Instituto"
                     loading="lazy"
                     className="h-28 w-28 shrink-0 rounded-full bg-brand-tint object-cover object-top"
