@@ -4,7 +4,7 @@ import logoAsset from "@/assets/logo-frei.png.asset.json";
 export function SiteFooter() {
   return (
     <footer className="bg-brand-deep py-12 text-primary-foreground">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-3 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div className="flex items-start gap-3">
           <img
             src={logoAsset.url}
@@ -18,6 +18,25 @@ export function SiteFooter() {
               Instituto Social Nossa Senhora de Fátima
             </p>
           </div>
+        </div>
+
+        <div>
+          <h2 className="font-display text-sm font-bold tracking-wide uppercase">Navegação</h2>
+          <ul className="mt-4 space-y-2 text-sm text-primary-foreground/85">
+            {[
+              { href: "#inicio", label: "Início" },
+              { href: "#programacao", label: "Programação" },
+              { href: "#cursos", label: "Cursos" },
+              { href: "#parceiros", label: "Parceiros" },
+              { href: "#inscricao", label: "Inscrição" },
+            ].map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="hover:underline">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>
