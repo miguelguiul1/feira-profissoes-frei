@@ -43,7 +43,7 @@ const REASONS = [
 
 export function ReasonsSection() {
   return (
-    <section className="bg-background py-16 lg:py-24" aria-labelledby="motivos-titulo">
+    <section className="bg-linear-to-b from-background to-brand-tint py-16 lg:py-24" aria-labelledby="motivos-titulo">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <h2
           id="motivos-titulo"
@@ -67,7 +67,7 @@ export function ReasonsSection() {
           ))}
         </div>
 
-        <div className="mt-10 grid items-center gap-6 rounded-3xl bg-brand-soft p-6 shadow-soft sm:p-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="mt-12 grid items-center gap-8 rounded-4xl bg-brand-tint p-8 shadow-card sm:p-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div className="min-w-0">
             <h3 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
               Tradição que atravessa gerações!
