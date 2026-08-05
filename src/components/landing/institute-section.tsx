@@ -22,7 +22,7 @@ const STRUCTURE = [
 
 export function InstituteSection() {
   return (
-    <section className="bg-background py-16 lg:py-24" aria-labelledby="instituto-titulo">
+    <section className="bg-linear-to-b from-background to-brand-soft py-16 lg:py-24" aria-labelledby="instituto-titulo">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="text-center">
           <h2
