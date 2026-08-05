@@ -3,6 +3,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MediaPlaceholder } from "./media-placeholder";
+import roboticaAlunos from "@/assets/robotica-alunos.jpg.asset.json";
+import depoimentoRicardo from "@/assets/depoimento-ricardo.jpg.asset.json";
 import { cn } from "@/lib/utils";
 
 const PARTNERS = [
@@ -73,10 +75,12 @@ export function HeroCarousel() {
                     </Button>
                   </div>
                 </div>
-                <MediaPlaceholder
-                  label="Foto: alunos com projeto de robótica"
-                  className="aspect-[4/3] w-full bg-background"
+                <img
+                  src={roboticaAlunos.url}
+                  alt="Alunos do Instituto apresentando projetos de robótica"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-soft"
                 />
+
               </div>
             </div>
 
@@ -116,10 +120,13 @@ export function HeroCarousel() {
                   Depoimentos
                 </h2>
                 <div className="mt-6 grid gap-6 rounded-2xl bg-background p-6 shadow-soft sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
-                  <MediaPlaceholder
-                    label="Foto do ex-aluno"
-                    className="h-28 w-28 shrink-0 rounded-full"
+                  <img
+                    src={depoimentoRicardo.url}
+                    alt="Retrato de Ricardo Hessel de Araújo, ex-aluno do Instituto"
+                    loading="lazy"
+                    className="h-28 w-28 shrink-0 rounded-full bg-brand-tint object-cover object-top"
                   />
+
                   <blockquote className="min-w-0">
                     <Quote className="h-6 w-6 text-primary" aria-hidden="true" />
                     <p className="mt-2 text-base text-foreground/85 italic">

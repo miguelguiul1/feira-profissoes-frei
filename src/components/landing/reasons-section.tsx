@@ -6,7 +6,7 @@ import {
   Rocket,
   Target,
 } from "lucide-react";
-import { MediaPlaceholder } from "./media-placeholder";
+import equipeInstituto from "@/assets/equipe-instituto.jpg.asset.json";
 
 const REASONS = [
   {
@@ -76,10 +76,13 @@ export function ReasonsSection() {
               55 anos de inúmeras histórias de sucesso!
             </p>
           </div>
-          <MediaPlaceholder
-            label="Foto da equipe do Instituto"
-            className="aspect-[16/9] w-full bg-background"
+          <img
+            src={equipeInstituto.url}
+            alt="Equipe e alunos do Instituto reunidos no auditório"
+            loading="lazy"
+            className="aspect-[16/9] w-full rounded-2xl object-cover shadow-soft"
           />
+
         </div>
       </div>
     </section>

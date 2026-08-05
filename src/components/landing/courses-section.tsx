@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { MediaPlaceholder } from "./media-placeholder";
+import cursoInformatica from "@/assets/curso-informatica.jpg.asset.json";
+import roboticaAlunos from "@/assets/robotica-alunos.jpg.asset.json";
 
 const COURSES = [
   {
@@ -9,24 +11,28 @@ const COURSES = [
     description: "TI, Programação e Criação de Sites.",
     hours: "1.000h",
     duration: "1 ano — segunda a sexta",
+    image: cursoInformatica.url,
   },
   {
     title: "Curso Livre de Inglês Básico ao Pré-Intermediário",
     description: "Comunicação, Gramática e Conversação.",
     hours: "400h",
     duration: "1 ano superintensivo",
+    image: null,
   },
   {
     title: "Eletromecânica de Autos",
     description: "Elétrica Automotiva, Mecânica e Diagnóstico.",
     hours: "880h",
     duration: "1 ano — segunda a sexta",
+    image: roboticaAlunos.url,
   },
   {
     title: "Curso Técnico em Administração",
     description: "Estoques, RH, Logística, Marketing e Contabilidade.",
     hours: "1.000h",
     duration: "1 ano — segunda a sexta",
+    image: null,
   },
 ];
 
@@ -96,10 +102,20 @@ export function CoursesSection() {
                 key={course.title}
                 className="flex min-w-0 flex-[0_0_88%] flex-col rounded-3xl bg-card p-5 shadow-soft ring-1 ring-border sm:flex-[0_0_48%] lg:flex-[0_0_31%]"
               >
-                <MediaPlaceholder
-                  label={`Foto do curso: ${course.title}`}
-                  className="aspect-[16/10] w-full"
-                />
+                {course.image ? (
+                  <img
+                    src={course.image}
+                    alt={`Imagem do ${course.title}`}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full rounded-2xl object-cover"
+                  />
+                ) : (
+                  <MediaPlaceholder
+                    label={`Foto do curso: ${course.title}`}
+                    className="aspect-[16/10] w-full"
+                  />
+                )}
+
                 <h3 className="mt-5 font-display text-lg leading-snug font-bold text-primary">
                   {course.title}
                 </h3>
