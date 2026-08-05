@@ -16,13 +16,9 @@ const GALLERY = [
 
 export function PartnersSection() {
   return (
-    <section
-      id="parceiros"
-      className="bg-linear-to-b from-brand to-brand-deep py-16 lg:py-24"
-      aria-labelledby="parceiros-titulo"
-    >
+    <section id="parceiros" className="bg-brand py-16 lg:py-24" aria-labelledby="parceiros-titulo">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="text-center">
+        <div id="galeria" className="text-center">
           <h2 className="font-display text-3xl font-extrabold text-primary-foreground sm:text-4xl">
             Nossa última Feira
           </h2>
@@ -33,12 +29,12 @@ export function PartnersSection() {
 
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {GALLERY.map((item) => (
-            <li key={item.src} className="rounded-3xl bg-background p-3 shadow-card">
+            <li key={item.src} className="rounded-2xl bg-background p-3 shadow-card">
               <img
                 src={item.src}
                 alt={item.alt}
                 loading="lazy"
-                className="aspect-[4/3] w-full rounded-2xl object-cover"
+                className="aspect-[4/3] w-full rounded-xl object-cover"
               />
             </li>
           ))}
@@ -49,10 +45,10 @@ export function PartnersSection() {
             id="parceiros-titulo"
             className="font-display text-3xl font-extrabold text-primary-foreground sm:text-4xl"
           >
-            Empresas parceiras
+            Nossos Parceiros
           </h2>
           <p className="mt-2 text-primary-foreground/80">
-            Organizações que apoiam a formação dos nossos alunos.
+            Empresas e instituições que caminham com o Frei.
           </p>
         </div>
 
@@ -60,10 +56,10 @@ export function PartnersSection() {
           {PARTNERS.map((partner) => (
             <li
               key={partner.name}
-              className="flex flex-col items-center gap-4 rounded-3xl bg-background p-6 shadow-card"
+              className="flex items-center gap-4 rounded-full bg-background px-6 py-4 shadow-card"
             >
               {partner.logo ? (
-                <div className="flex aspect-[3/2] w-full items-center justify-center p-2">
+                <div className="flex h-14 w-20 shrink-0 items-center justify-center">
                   <img
                     src={partner.logo}
                     alt={`Logo ${partner.name}`}
@@ -72,12 +68,9 @@ export function PartnersSection() {
                   />
                 </div>
               ) : (
-                <MediaPlaceholder
-                  label={`Logo ${partner.name}`}
-                  className="aspect-[3/2] w-full"
-                />
+                <MediaPlaceholder label={`Logo ${partner.name}`} className="h-14 w-20 shrink-0" />
               )}
-              <span className="text-center text-sm font-semibold text-primary">{partner.name}</span>
+              <span className="min-w-0 text-sm font-semibold text-primary">{partner.name}</span>
             </li>
           ))}
         </ul>

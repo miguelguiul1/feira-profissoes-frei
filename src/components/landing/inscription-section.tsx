@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, Loader2, PartyPopper } from "lucide-react";
+import { CheckSquare, Loader2, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import alunosTurma from "@/assets/alunos-turma.jpg.asset.json";
@@ -43,13 +43,14 @@ const COURSES = [
 ];
 
 const BENEFITS = [
-  "Material informativo sobre todos os cursos",
-  "Palestras com professores e profissionais",
-  "Visitação às instalações do Instituto",
+  "Material informativo dos cursos",
   "Contato com empresas parceiras",
-  "Brindes exclusivos da 6ª edição",
-  "Networking com especialistas da área",
+  "Palestras com profissionais de sucesso",
+  "Concorrer a brindes exclusivos",
+  "Visitação completa às instalações",
+  "Networking com especialistas",
 ];
+
 
 export function InscriptionSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -107,12 +108,12 @@ export function InscriptionSection() {
       />
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-          <div className="rounded-3xl bg-background/95 p-6 shadow-card ring-1 ring-primary-foreground/20 backdrop-blur-md sm:p-8">
+          <div className="rounded-4xl bg-background/95 p-6 shadow-card ring-1 ring-primary-foreground/20 backdrop-blur-md sm:p-8">
             <h2
               id="inscricao-titulo"
               className="font-display text-2xl font-extrabold text-primary sm:text-3xl"
             >
-              Faça sua inscrição
+              Formulário de Inscrição
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
               Preencha o formulário e garanta o seu lugar na 6ª Feira das Profissões.
@@ -292,14 +293,12 @@ export function InscriptionSection() {
             )}
           </div>
 
-          <aside className="rounded-3xl bg-primary-foreground/10 p-6 ring-1 ring-primary-foreground/25 backdrop-blur-md sm:p-8">
-            <h3 className="font-display text-xl font-extrabold text-primary-foreground">
-              O que você ganha
-            </h3>
-            <ul className="mt-5 space-y-3">
+          <aside className="h-fit rounded-4xl bg-card p-6 shadow-card sm:p-8">
+            <h3 className="font-display text-xl font-extrabold text-primary">O que você ganha:</h3>
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
               {BENEFITS.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-primary-foreground/90">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+                <li key={item} className="flex items-start gap-3 text-sm text-foreground/80">
+                  <CheckSquare className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
                   <span className="min-w-0">{item}</span>
                 </li>
               ))}

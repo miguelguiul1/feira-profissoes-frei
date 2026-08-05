@@ -31,7 +31,7 @@ const COURSES = [
   },
   {
     title: "Curso Técnico em Administração",
-    description: "Estoques, RH, Logística, Marketing e Contabilidade.",
+    description: "Controle de estoques, gestão de RH, logística e marketing.",
     hours: "1.000h",
     duration: "1 ano — segunda a sexta",
     image: cursoAdministracao.url,
@@ -62,7 +62,11 @@ export function CoursesSection() {
   }, [emblaApi, onSelect]);
 
   return (
-    <section id="cursos" className="bg-surface py-16 lg:py-24" aria-labelledby="cursos-titulo">
+    <section
+      id="cursos"
+      className="bg-linear-to-b from-muted to-brand-soft py-16 lg:py-24"
+      aria-labelledby="cursos-titulo"
+    >
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
           <div className="min-w-0">
@@ -103,7 +107,7 @@ export function CoursesSection() {
             {COURSES.map((course) => (
               <article
                 key={course.title}
-                className="flex min-w-0 flex-[0_0_88%] flex-col rounded-3xl bg-card p-5 shadow-soft ring-1 ring-border sm:flex-[0_0_48%] lg:flex-[0_0_31%]"
+                className="flex min-w-0 flex-[0_0_88%] flex-col rounded-4xl bg-card p-5 shadow-soft sm:flex-[0_0_48%] lg:flex-[0_0_31%]"
               >
                 {course.image ? (
                   <img

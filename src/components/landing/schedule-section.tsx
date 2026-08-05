@@ -47,7 +47,7 @@ export function ScheduleSection() {
   return (
     <section
       id="programacao"
-      className="bg-surface py-16 lg:py-24"
+      className="bg-brand-soft py-16 lg:py-24"
       aria-labelledby="programacao-titulo"
     >
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
@@ -57,24 +57,24 @@ export function ScheduleSection() {
         >
           Programação da Feira
         </h2>
-        <p className="mt-2 text-muted-foreground">
+        <p className="mt-2 text-foreground/70">
           Percorra as salas e conheça cada área de formação.
         </p>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <ol className="relative space-y-6 border-l-2 border-brand-tint pl-6">
+          <ol className="relative space-y-6 border-l-2 border-primary/25 pl-6">
             {SCHEDULE.map(({ icon: Icon, area, rooms }) => (
               <li key={area} className="relative">
                 <span className="absolute top-1 -left-[2.35rem] inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
                   <Icon className="h-4.5 w-4.5" aria-hidden="true" />
                 </span>
-                <div className="rounded-3xl bg-card p-5 shadow-soft ring-1 ring-border">
+                <div className="rounded-3xl bg-card p-5 shadow-soft">
                   <h3 className="font-display text-lg font-bold text-primary">{area}</h3>
                   <ul className="mt-3 space-y-2">
                     {rooms.map((entry) => (
                       <li
                         key={entry.room}
-                        className="grid grid-cols-[minmax(0,1fr)] gap-1 rounded-2xl bg-brand-soft px-4 py-3 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-3"
+                        className="grid grid-cols-[minmax(0,1fr)] gap-1 rounded-2xl bg-brand-tint px-4 py-3 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-3"
                       >
                         <span className="shrink-0 text-xs font-bold tracking-wide text-primary uppercase">
                           {entry.room}
@@ -88,11 +88,14 @@ export function ScheduleSection() {
             ))}
           </ol>
 
-          <div id="contato" className="rounded-3xl bg-card p-5 shadow-card ring-1 ring-border sm:p-7">
-            <h3 className="font-display text-xl font-bold text-primary">
+          <div
+            id="contato"
+            className="h-fit rounded-4xl bg-linear-to-br from-brand to-brand-deep p-5 shadow-card sm:p-7"
+          >
+            <h3 className="font-display text-xl font-bold text-primary-foreground">
               Como chegar na 6ª Feira das Profissões?
             </h3>
-            <div className="mt-5 overflow-hidden rounded-2xl border border-border">
+            <div className="mt-5 overflow-hidden rounded-3xl">
               <iframe
                 title="Mapa com a localização do Instituto Social Nossa Senhora de Fátima"
                 src={MAP_SRC}
@@ -105,7 +108,7 @@ export function ScheduleSection() {
               {BADGES.map(({ icon: Icon, text }) => (
                 <li
                   key={text}
-                  className="flex items-start gap-3 rounded-2xl bg-brand-soft px-4 py-3 text-sm font-medium text-primary"
+                  className="flex items-start gap-3 rounded-full bg-primary-foreground/15 px-4 py-3 text-sm font-medium text-primary-foreground"
                 >
                   <Icon className="mt-0.5 h-4.5 w-4.5 shrink-0" aria-hidden="true" />
                   <span className="min-w-0">{text}</span>

@@ -79,7 +79,7 @@ export function HeroCarousel() {
 
             {/* Slide 2 */}
             <div className="min-w-0 flex-[0_0_100%]">
-              <div className="rounded-3xl bg-gradient-to-br from-brand to-brand-deep p-6 shadow-card sm:p-10 lg:p-14">
+              <div className="rounded-3xl bg-brand p-6 shadow-card sm:p-10 lg:p-14">
                 <h2 className="font-display text-2xl font-extrabold text-primary-foreground sm:text-3xl">
                   Nossos Parceiros
                 </h2>
@@ -122,7 +122,7 @@ export function HeroCarousel() {
 
             {/* Slide 3 */}
             <div className="min-w-0 flex-[0_0_100%]">
-              <div className="rounded-3xl bg-brand-tint p-6 shadow-card sm:p-10 lg:p-14">
+              <div className="rounded-3xl bg-brand-soft p-6 shadow-card sm:p-10 lg:p-14">
                 <h2 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
                   Depoimentos
                 </h2>
