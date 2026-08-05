@@ -86,8 +86,8 @@ export function SiteHeader({ onOpenAdmin }: { onOpenAdmin: () => void }) {
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-primary transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none lg:hidden"
           >
-            {open ? <Menu className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            {open ? <X className="hidden" /> : null}
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+
           </button>
         </div>
       </div>
