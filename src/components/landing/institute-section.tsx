@@ -36,7 +36,13 @@ export function InstituteSection() {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <article className="rounded-3xl bg-card p-7 shadow-soft ring-1 ring-border">
-            <h3 className="font-display text-xl font-bold text-primary">
+            <img
+              src={fachadaInstituto.url}
+              alt="Fachada do Instituto Social Nossa Senhora de Fátima"
+              loading="lazy"
+              className="aspect-[16/9] w-full rounded-2xl object-cover"
+            />
+            <h3 className="mt-5 font-display text-xl font-bold text-primary">
               Mais de 50 anos formando gerações
             </h3>
             <p className="mt-4 text-sm leading-relaxed text-foreground/80">
@@ -53,9 +59,11 @@ export function InstituteSection() {
           </article>
 
           <article className="grid gap-6 rounded-3xl bg-brand-soft p-7 shadow-soft sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
-            <MediaPlaceholder
-              label="Foto do Frei Xavier"
-              className="h-32 w-32 shrink-0 rounded-2xl bg-background"
+            <img
+              src={freiXavier.url}
+              alt="Frei Xavier, idealizador do Instituto"
+              loading="lazy"
+              className="h-32 w-32 shrink-0 rounded-2xl object-cover"
             />
             <div className="min-w-0">
               <blockquote className="text-sm leading-relaxed text-foreground/85 italic">
@@ -69,6 +77,7 @@ export function InstituteSection() {
               </p>
             </div>
           </article>
+
         </div>
 
         <div className="mt-6 grid gap-6 md:grid-cols-3">
