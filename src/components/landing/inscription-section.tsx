@@ -53,8 +53,9 @@ export function InscriptionSection() {
   const [submitted, setSubmitted] = useState(false);
 
   const form = useForm<InscriptionInput>({
-    resolver: zodResolver(inscriptionSchema),
+    resolver: zodResolver(inscriptionSchema) as Resolver<InscriptionInput>,
     mode: "onBlur",
+
     defaultValues: {
       full_name: "",
       phone: "",
