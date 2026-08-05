@@ -56,10 +56,10 @@ export function PartnersSection() {
           {PARTNERS.map((partner) => (
             <li
               key={partner.name}
-              className="flex flex-col items-center gap-4 rounded-full bg-background px-8 py-7 shadow-card"
+              className="flex items-center gap-4 rounded-full bg-background px-6 py-4 shadow-card"
             >
               {partner.logo ? (
-                <div className="flex h-20 w-full items-center justify-center">
+                <div className="flex h-14 w-20 shrink-0 items-center justify-center">
                   <img
                     src={partner.logo}
                     alt={`Logo ${partner.name}`}
@@ -68,9 +68,9 @@ export function PartnersSection() {
                   />
                 </div>
               ) : (
-                <MediaPlaceholder label={`Logo ${partner.name}`} className="h-20 w-full" />
+                <MediaPlaceholder label={`Logo ${partner.name}`} className="h-14 w-20 shrink-0" />
               )}
-              <span className="text-center text-sm font-semibold text-primary">{partner.name}</span>
+              <span className="min-w-0 text-sm font-semibold text-primary">{partner.name}</span>
             </li>
           ))}
         </ul>
