@@ -238,7 +238,7 @@ export function InscriptionSection() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Como ficou sabendo da feira?</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
+                        <Select onValueChange={field.onChange} value={field.value ?? ""}>
                           <FormControl>
                             <SelectTrigger>
                               <SelectValue placeholder="Selecione" />

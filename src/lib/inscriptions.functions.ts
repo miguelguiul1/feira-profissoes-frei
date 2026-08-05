@@ -19,7 +19,7 @@ export const inscriptionSchema = z.object({
     .trim()
     .email({ message: "E-mail inválido." })
     .max(255, { message: "Máximo de 255 caracteres." }),
-  education_level: z.string().trim().min(1, { message: "Selecione a escolaridade." }),
+  
   is_former_student: z.enum(["sim", "nao"], { message: "Selecione uma opção." }),
   course_interest: z.string().trim().min(1, { message: "Selecione um curso." }),
   how_found_out: z.string().trim().max(120).optional().or(z.literal("")),
