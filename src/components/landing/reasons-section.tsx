@@ -6,7 +6,7 @@ import {
   Rocket,
   Target,
 } from "lucide-react";
-import { MediaPlaceholder } from "./media-placeholder";
+import equipeInstituto from "@/assets/equipe-instituto.jpg.asset.json";
 
 const REASONS = [
   {
