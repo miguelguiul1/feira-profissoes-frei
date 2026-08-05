@@ -3,18 +3,11 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MediaPlaceholder } from "./media-placeholder";
-import roboticaAlunos from "@/assets/robotica-alunos.jpg.asset.json";
-import depoimentoRicardo from "@/assets/depoimento-ricardo.jpg.asset.json";
+import roboticaAlunos from "@/assets/robotica-alunos-2.png.asset.json";
+import exAlunoRicardo from "@/assets/ex-aluno-ricardo.png.asset.json";
+import { PARTNERS } from "./partners";
 import { cn } from "@/lib/utils";
 
-const PARTNERS = [
-  "Viação Grajaú",
-  "PWI Sistemas",
-  "CM Comandos Lineares",
-  "MWM",
-  "Casa da Mulher Paulistana",
-  "Cidade de São Paulo — Assistência Social",
-];
 
 function scrollToId(id: string) {
   document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -94,14 +87,28 @@ export function HeroCarousel() {
                   Empresas e instituições que caminham com o Frei.
                 </p>
                 <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {PARTNERS.map((partner) => (
-                    <MediaPlaceholder
-                      key={partner}
-                      tone="dark"
-                      label={partner}
-                      className="h-20 rounded-xl"
-                    />
-                  ))}
+                  {PARTNERS.map((partner) =>
+                    partner.logo ? (
+                      <div
+                        key={partner.name}
+                        className="flex h-20 items-center justify-center rounded-xl bg-background p-2"
+                      >
+                        <img
+                          src={partner.logo}
+                          alt={`Logo ${partner.name}`}
+                          loading="lazy"
+                          className="max-h-full max-w-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <MediaPlaceholder
+                        key={partner.name}
+                        tone="dark"
+                        label={partner.name}
+                        className="h-20 rounded-xl"
+                      />
+                    ),
+                  )}
                 </div>
                 <Button
                   variant="outline"
@@ -121,7 +128,7 @@ export function HeroCarousel() {
                 </h2>
                 <div className="mt-6 grid gap-6 rounded-2xl bg-background p-6 shadow-soft sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
                   <img
-                    src={depoimentoRicardo.url}
+                    src={exAlunoRicardo.url}
                     alt="Retrato de Ricardo Hessel de Araújo, ex-aluno do Instituto"
                     loading="lazy"
                     className="h-28 w-28 shrink-0 rounded-full bg-brand-tint object-cover object-top"
