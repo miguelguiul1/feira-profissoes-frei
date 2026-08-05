@@ -2,8 +2,9 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { MediaPlaceholder } from "./media-placeholder";
-import cursoInformatica from "@/assets/curso-informatica.jpg.asset.json";
-import roboticaAlunos from "@/assets/robotica-alunos.jpg.asset.json";
+import cursoInformatica from "@/assets/curso-informatica-2.png.asset.json";
+import cursoIngles from "@/assets/curso-ingles.png.asset.json";
+import cursoEletromecanica from "@/assets/curso-eletromecanica.png.asset.json";
 
 const COURSES = [
   {
@@ -18,14 +19,14 @@ const COURSES = [
     description: "Comunicação, Gramática e Conversação.",
     hours: "400h",
     duration: "1 ano superintensivo",
-    image: null,
+    image: cursoIngles.url,
   },
   {
     title: "Eletromecânica de Autos",
     description: "Elétrica Automotiva, Mecânica e Diagnóstico.",
     hours: "880h",
     duration: "1 ano — segunda a sexta",
-    image: roboticaAlunos.url,
+    image: cursoEletromecanica.url,
   },
   {
     title: "Curso Técnico em Administração",
@@ -35,6 +36,7 @@ const COURSES = [
     image: null,
   },
 ];
+
 
 export function CoursesSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps" });
