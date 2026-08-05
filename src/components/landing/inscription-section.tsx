@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, Loader2, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
@@ -61,7 +61,6 @@ export function InscriptionSection() {
       phone: "",
       email: "",
       education_level: "",
-      is_former_student: undefined,
       course_interest: "",
       how_found_out: "",
       estimated_arrival: "",
