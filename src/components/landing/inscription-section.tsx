@@ -97,7 +97,13 @@ export function InscriptionSection() {
       className="relative overflow-hidden bg-gradient-to-br from-brand to-brand-deep py-16 lg:py-24"
       aria-labelledby="inscricao-titulo"
     >
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
+      <img
+        src={alunosTurma.url}
+        alt="Turma de alunos do Instituto Social Nossa Senhora de Fátima"
+        loading="lazy"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-15"
+      />
+      <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <div className="rounded-3xl bg-background/95 p-6 shadow-card ring-1 ring-primary-foreground/20 backdrop-blur-md sm:p-8">
             <h2
