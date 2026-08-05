@@ -1,5 +1,6 @@
 import { Building2, Laptop, Projector } from "lucide-react";
-import { MediaPlaceholder } from "./media-placeholder";
+import freiXavier from "@/assets/frei-xavier.jpg.asset.json";
+import fachadaInstituto from "@/assets/fachada-instituto.jpg.asset.json";
 
 const STRUCTURE = [
   {
