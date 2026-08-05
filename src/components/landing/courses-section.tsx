@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight, CalendarDays, Clock } from "lucide-react";
 import { MediaPlaceholder } from "./media-placeholder";
+import cursoInformatica from "@/assets/curso-informatica.jpg.asset.json";
+import roboticaAlunos from "@/assets/robotica-alunos.jpg.asset.json";
 
 const COURSES = [
   {
@@ -9,24 +11,28 @@ const COURSES = [
     description: "TI, Programação e Criação de Sites.",
     hours: "1.000h",
     duration: "1 ano — segunda a sexta",
+    image: cursoInformatica.url,
   },
   {
     title: "Curso Livre de Inglês Básico ao Pré-Intermediário",
     description: "Comunicação, Gramática e Conversação.",
     hours: "400h",
     duration: "1 ano superintensivo",
+    image: null,
   },
   {
     title: "Eletromecânica de Autos",
     description: "Elétrica Automotiva, Mecânica e Diagnóstico.",
     hours: "880h",
     duration: "1 ano — segunda a sexta",
+    image: roboticaAlunos.url,
   },
   {
     title: "Curso Técnico em Administração",
     description: "Estoques, RH, Logística, Marketing e Contabilidade.",
     hours: "1.000h",
     duration: "1 ano — segunda a sexta",
+    image: null,
   },
 ];
 
