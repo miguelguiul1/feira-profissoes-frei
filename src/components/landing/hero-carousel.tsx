@@ -3,18 +3,11 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MediaPlaceholder } from "./media-placeholder";
-import roboticaAlunos from "@/assets/robotica-alunos.jpg.asset.json";
-import depoimentoRicardo from "@/assets/depoimento-ricardo.jpg.asset.json";
+import roboticaAlunos from "@/assets/robotica-alunos-2.png.asset.json";
+import exAlunoRicardo from "@/assets/ex-aluno-ricardo.png.asset.json";
+import { PARTNERS } from "./partners";
 import { cn } from "@/lib/utils";
 
-const PARTNERS = [
-  "Viação Grajaú",
-  "PWI Sistemas",
-  "CM Comandos Lineares",
-  "MWM",
-  "Casa da Mulher Paulistana",
-  "Cidade de São Paulo — Assistência Social",
-];
 
 function scrollToId(id: string) {
   document.querySelector(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
