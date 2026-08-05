@@ -87,14 +87,28 @@ export function HeroCarousel() {
                   Empresas e instituições que caminham com o Frei.
                 </p>
                 <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {PARTNERS.map((partner) => (
-                    <MediaPlaceholder
-                      key={partner}
-                      tone="dark"
-                      label={partner}
-                      className="h-20 rounded-xl"
-                    />
-                  ))}
+                  {PARTNERS.map((partner) =>
+                    partner.logo ? (
+                      <div
+                        key={partner.name}
+                        className="flex h-20 items-center justify-center rounded-xl bg-background p-2"
+                      >
+                        <img
+                          src={partner.logo}
+                          alt={`Logo ${partner.name}`}
+                          loading="lazy"
+                          className="max-h-full max-w-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <MediaPlaceholder
+                        key={partner.name}
+                        tone="dark"
+                        label={partner.name}
+                        className="h-20 rounded-xl"
+                      />
+                    ),
+                  )}
                 </div>
                 <Button
                   variant="outline"
