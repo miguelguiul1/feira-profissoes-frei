@@ -24,13 +24,14 @@ import {
 } from "@/components/ui/select";
 import { inscriptionSchema, type InscriptionInput } from "@/lib/inscriptions.functions";
 
-const EDUCATION = [
-  "Ensino Fundamental cursando",
-  "Ensino Fundamental completo",
-  "Ensino Médio cursando",
-  "Ensino Médio completo",
-  "Ensino Técnico",
-  "Ensino Superior",
+const SOURCES = [
+  "Escola",
+  "Redes sociais",
+  "Amigos ou familiares",
+  "Ex-aluno do Frei",
+  "Panfleto ou cartaz",
+  "Site do Instituto",
+  "Outro",
 ];
 
 const COURSES = [
@@ -61,7 +62,7 @@ export function InscriptionSection() {
       full_name: "",
       phone: "",
       email: "",
-      education_level: "",
+      
       course_interest: "",
       how_found_out: "",
       estimated_arrival: "",
@@ -73,7 +74,7 @@ export function InscriptionSection() {
       full_name: values.full_name,
       phone: values.phone,
       email: values.email,
-      education_level: values.education_level,
+      education_level: "Não informado",
       is_former_student: values.is_former_student === "sim",
       course_interest: values.course_interest,
       how_found_out: values.how_found_out || null,
@@ -188,30 +189,6 @@ export function InscriptionSection() {
                   />
                   <FormField
                     control={form.control}
-                    name="education_level"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Escolaridade*</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Selecione" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {EDUCATION.map((item) => (
-                              <SelectItem key={item} value={item}>
-                                {item}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
                     name="is_former_student"
                     render={({ field }) => (
                       <FormItem>
@@ -261,9 +238,20 @@ export function InscriptionSection() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Como ficou sabendo da feira?</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Escola, redes sociais, amigos..." maxLength={120} {...field} />
-                        </FormControl>
+                        <Select onValueChange={field.onChange} value={field.value ?? ""}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Selecione" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {SOURCES.map((item) => (
+                              <SelectItem key={item} value={item}>
+                                {item}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
