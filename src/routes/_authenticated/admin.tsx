@@ -35,7 +35,6 @@ function toCsv(rows: InscriptionRow[]) {
     "Nome",
     "Telefone",
     "E-mail",
-    "Escolaridade",
     "Ex-aluno",
     "Curso de interesse",
     "Como soube",
@@ -48,7 +47,6 @@ function toCsv(rows: InscriptionRow[]) {
       row.full_name,
       row.phone,
       row.email,
-      row.education_level,
       row.is_former_student ? "Sim" : "Não",
       row.course_interest,
       row.how_found_out ?? "",
@@ -175,7 +173,6 @@ function AdminPage() {
                   <TableRow>
                     <TableHead>Nome</TableHead>
                     <TableHead>Contato</TableHead>
-                    <TableHead>Escolaridade</TableHead>
                     <TableHead>Ex-aluno</TableHead>
                     <TableHead>Curso</TableHead>
                     <TableHead>Data</TableHead>
@@ -189,7 +186,6 @@ function AdminPage() {
                         <span className="block">{row.email}</span>
                         <span className="block text-muted-foreground">{row.phone}</span>
                       </TableCell>
-                      <TableCell className="text-sm">{row.education_level}</TableCell>
                       <TableCell className="text-sm">
                         {row.is_former_student ? "Sim" : "Não"}
                       </TableCell>
