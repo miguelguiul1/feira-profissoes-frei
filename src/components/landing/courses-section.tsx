@@ -102,10 +102,20 @@ export function CoursesSection() {
                 key={course.title}
                 className="flex min-w-0 flex-[0_0_88%] flex-col rounded-3xl bg-card p-5 shadow-soft ring-1 ring-border sm:flex-[0_0_48%] lg:flex-[0_0_31%]"
               >
-                <MediaPlaceholder
-                  label={`Foto do curso: ${course.title}`}
-                  className="aspect-[16/10] w-full"
-                />
+                {course.image ? (
+                  <img
+                    src={course.image}
+                    alt={`Imagem do ${course.title}`}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full rounded-2xl object-cover"
+                  />
+                ) : (
+                  <MediaPlaceholder
+                    label={`Foto do curso: ${course.title}`}
+                    className="aspect-[16/10] w-full"
+                  />
+                )}
+
                 <h3 className="mt-5 font-display text-lg leading-snug font-bold text-primary">
                   {course.title}
                 </h3>
