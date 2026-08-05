@@ -75,10 +75,12 @@ export function HeroCarousel() {
                     </Button>
                   </div>
                 </div>
-                <MediaPlaceholder
-                  label="Foto: alunos com projeto de robótica"
-                  className="aspect-[4/3] w-full bg-background"
+                <img
+                  src={roboticaAlunos.url}
+                  alt="Alunos do Instituto apresentando projetos de robótica"
+                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-soft"
                 />
+
               </div>
             </div>
 
