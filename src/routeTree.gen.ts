@@ -12,6 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as CursosRouteImport } from './routes/cursos'
+import { Route as ExpositoresRouteImport } from './routes/expositores'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as InstituicaoRouteImport } from './routes/instituicao'
+import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
@@ -29,6 +33,26 @@ const CursosRoute = CursosRouteImport.update({
   path: '/cursos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExpositoresRoute = ExpositoresRouteImport.update({
+  id: '/expositores',
+  path: '/expositores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstituicaoRoute = InstituicaoRouteImport.update({
+  id: '/instituicao',
+  path: '/instituicao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParceirosRoute = ParceirosRouteImport.update({
+  id: '/parceiros',
+  path: '/parceiros',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgramacaoRoute = ProgramacaoRouteImport.update({
   id: '/programacao',
   path: '/programacao',
@@ -43,12 +67,20 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cursos': typeof CursosRoute
+  '/expositores': typeof ExpositoresRoute
+  '/faq': typeof FaqRoute
+  '/instituicao': typeof InstituicaoRoute
+  '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
   '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cursos': typeof CursosRoute
+  '/expositores': typeof ExpositoresRoute
+  '/faq': typeof FaqRoute
+  '/instituicao': typeof InstituicaoRoute
+  '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
   '/admin': typeof AuthenticatedAdminRoute
 }
@@ -57,19 +89,43 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/cursos': typeof CursosRoute
+  '/expositores': typeof ExpositoresRoute
+  '/faq': typeof FaqRoute
+  '/instituicao': typeof InstituicaoRoute
+  '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cursos' | '/programacao' | '/admin'
+  fullPaths:
+    | '/'
+    | '/cursos'
+    | '/expositores'
+    | '/faq'
+    | '/instituicao'
+    | '/parceiros'
+    | '/programacao'
+    | '/admin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cursos' | '/programacao' | '/admin'
+  to:
+    | '/'
+    | '/cursos'
+    | '/expositores'
+    | '/faq'
+    | '/instituicao'
+    | '/parceiros'
+    | '/programacao'
+    | '/admin'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/cursos'
+    | '/expositores'
+    | '/faq'
+    | '/instituicao'
+    | '/parceiros'
     | '/programacao'
     | '/_authenticated/admin'
   fileRoutesById: FileRoutesById
@@ -78,6 +134,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   CursosRoute: typeof CursosRoute
+  ExpositoresRoute: typeof ExpositoresRoute
+  FaqRoute: typeof FaqRoute
+  InstituicaoRoute: typeof InstituicaoRoute
+  ParceirosRoute: typeof ParceirosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
 }
 
@@ -102,6 +162,34 @@ declare module '@tanstack/react-router' {
       path: '/cursos'
       fullPath: '/cursos'
       preLoaderRoute: typeof CursosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/expositores': {
+      id: '/expositores'
+      path: '/expositores'
+      fullPath: '/expositores'
+      preLoaderRoute: typeof ExpositoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instituicao': {
+      id: '/instituicao'
+      path: '/instituicao'
+      fullPath: '/instituicao'
+      preLoaderRoute: typeof InstituicaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parceiros': {
+      id: '/parceiros'
+      path: '/parceiros'
+      fullPath: '/parceiros'
+      preLoaderRoute: typeof ParceirosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programacao': {
@@ -136,6 +224,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   CursosRoute: CursosRoute,
+  ExpositoresRoute: ExpositoresRoute,
+  FaqRoute: FaqRoute,
+  InstituicaoRoute: InstituicaoRoute,
+  ParceirosRoute: ParceirosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
 }
 export const routeTree = rootRouteImport
