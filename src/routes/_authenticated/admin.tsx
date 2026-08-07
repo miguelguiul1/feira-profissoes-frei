@@ -48,7 +48,8 @@ function toCsv(rows: InscriptionRow[]) {
     "Previsão de chegada",
     "Data da inscrição",
   ];
-  const escape = (value: string) => `"${value.replaceAll('"', '""')}"`;
+  // Spreadsheet programs execute cells starting with these characters as formulas.
+  const escape = (value: string) => `"${(/^[=+\-@\t\r]/.test(value) ? `'${value}` : value).replaceAll('"', '""')}"`;
   const lines = rows.map((row) =>
     [
       row.full_name,
