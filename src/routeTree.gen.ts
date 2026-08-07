@@ -11,12 +11,15 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as CursosRouteImport } from './routes/cursos'
 import { Route as ExpositoresRouteImport } from './routes/expositores'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as InscricaoRouteImport } from './routes/inscricao'
 import { Route as InstituicaoRouteImport } from './routes/instituicao'
 import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
 const IndexRoute = IndexRouteImport.update({
@@ -26,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CursosRoute = CursosRouteImport.update({
@@ -43,6 +51,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InscricaoRoute = InscricaoRouteImport.update({
+  id: '/inscricao',
+  path: '/inscricao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InstituicaoRoute = InstituicaoRouteImport.update({
   id: '/instituicao',
   path: '/instituicao',
@@ -58,6 +71,11 @@ const ProgramacaoRoute = ProgramacaoRouteImport.update({
   path: '/programacao',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -66,79 +84,100 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
   '/cursos': typeof CursosRoute
   '/expositores': typeof ExpositoresRoute
   '/faq': typeof FaqRoute
+  '/inscricao': typeof InscricaoRoute
   '/instituicao': typeof InstituicaoRoute
   '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
   '/cursos': typeof CursosRoute
   '/expositores': typeof ExpositoresRoute
   '/faq': typeof FaqRoute
+  '/inscricao': typeof InscricaoRoute
   '/instituicao': typeof InstituicaoRoute
   '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/contato': typeof ContatoRoute
   '/cursos': typeof CursosRoute
   '/expositores': typeof ExpositoresRoute
   '/faq': typeof FaqRoute
+  '/inscricao': typeof InscricaoRoute
   '/instituicao': typeof InstituicaoRoute
   '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/contato'
     | '/cursos'
     | '/expositores'
     | '/faq'
+    | '/inscricao'
     | '/instituicao'
     | '/parceiros'
     | '/programacao'
+    | '/sitemap.xml'
     | '/admin'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/contato'
     | '/cursos'
     | '/expositores'
     | '/faq'
+    | '/inscricao'
     | '/instituicao'
     | '/parceiros'
     | '/programacao'
+    | '/sitemap.xml'
     | '/admin'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/contato'
     | '/cursos'
     | '/expositores'
     | '/faq'
+    | '/inscricao'
     | '/instituicao'
     | '/parceiros'
     | '/programacao'
+    | '/sitemap.xml'
     | '/_authenticated/admin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  ContatoRoute: typeof ContatoRoute
   CursosRoute: typeof CursosRoute
   ExpositoresRoute: typeof ExpositoresRoute
   FaqRoute: typeof FaqRoute
+  InscricaoRoute: typeof InscricaoRoute
   InstituicaoRoute: typeof InstituicaoRoute
   ParceirosRoute: typeof ParceirosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -155,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cursos': {
@@ -178,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inscricao': {
+      id: '/inscricao'
+      path: '/inscricao'
+      fullPath: '/inscricao'
+      preLoaderRoute: typeof InscricaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/instituicao': {
       id: '/instituicao'
       path: '/instituicao'
@@ -197,6 +250,13 @@ declare module '@tanstack/react-router' {
       path: '/programacao'
       fullPath: '/programacao'
       preLoaderRoute: typeof ProgramacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -223,12 +283,15 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  ContatoRoute: ContatoRoute,
   CursosRoute: CursosRoute,
   ExpositoresRoute: ExpositoresRoute,
   FaqRoute: FaqRoute,
+  InscricaoRoute: InscricaoRoute,
   InstituicaoRoute: InstituicaoRoute,
   ParceirosRoute: ParceirosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
