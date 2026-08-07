@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import logoAsset from "@/assets/logo-frei.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const NAV_LINKS = [
-  { href: "#inicio", label: "Início" },
-  { href: "#programacao", label: "Programação" },
-  { href: "#cursos", label: "Cursos" },
-  { href: "#inscricao", label: "Inscrição" },
-  { href: "#contato", label: "Contato" },
-];
+import { NAV_LINKS } from "@/lib/site-data";
 
 export function SiteHeader({ onOpenAdmin }: { onOpenAdmin: () => void }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -23,11 +18,9 @@ export function SiteHeader({ onOpenAdmin }: { onOpenAdmin: () => void }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNav = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    event.preventDefault();
+  useEffect(() => {
     setOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  }, [pathname]);
 
   return (
     <header
@@ -37,9 +30,8 @@ export function SiteHeader({ onOpenAdmin }: { onOpenAdmin: () => void }) {
       )}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 lg:flex lg:justify-between lg:px-8">
-        <a
-          href="#inicio"
-          onClick={(e) => handleNav(e, "#inicio")}
+        <Link
+          to="/"
           className="flex min-w-0 items-center gap-3 rounded-full focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <img
@@ -57,60 +49,70 @@ export function SiteHeader({ onOpenAdmin }: { onOpenAdmin: () => void }) {
               Instituto Social Nossa Senhora de Fátima
             </span>
           </span>
-        </a>
+        </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Navegação principal">
+        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Navegação principal">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="rounded-full px-4 py-2 text-sm font-semibold text-foreground/80 transition-colors hover:bg-accent hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none active:bg-secondary"
+            <Link
+              key={link.to}
+              to={link.to}
+              activeOptions={{ exact: link.to === "/" }}
+              activeProps={{ className: "bg-accent text-primary" }}
+              className="rounded-full px-3 py-2 text-sm font-semibold text-foreground/80 transition-colors hover:bg-accent hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button
-            onClick={onOpenAdmin}
-            className="hidden rounded-full px-6 font-semibold lg:inline-flex"
-          >
-            Administrativo
+          <Button asChild className="hidden rounded-full px-6 font-semibold xl:inline-flex">
+            <Link to="/inscricao">Inscreva-se</Link>
           </Button>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
+            aria-controls="menu-principal"
             aria-label={open ? "Fechar menu" : "Abrir menu"}
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-primary transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none lg:hidden"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-primary transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none xl:hidden"
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-
+            {open ? (
+              <X className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
 
       {open ? (
-        <div className="border-t border-border bg-background lg:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3" aria-label="Navegação móvel">
+        <div id="menu-principal" className="border-t border-border bg-background xl:hidden">
+          <nav
+            className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3"
+            aria-label="Navegação móvel"
+          >
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNav(e, link.href)}
+              <Link
+                key={link.to}
+                to={link.to}
+                activeOptions={{ exact: link.to === "/" }}
+                activeProps={{ className: "bg-accent text-primary" }}
                 className="rounded-xl px-4 py-3 text-sm font-semibold text-foreground/80 transition-colors hover:bg-accent hover:text-primary"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
+            <Button asChild className="mt-2 rounded-full font-semibold">
+              <Link to="/inscricao">Inscreva-se</Link>
+            </Button>
             <Button
+              variant="outline"
               onClick={() => {
                 setOpen(false);
                 onOpenAdmin();
               }}
-              className="mt-2 rounded-full font-semibold"
+              className="rounded-full font-semibold"
             >
               Administrativo
             </Button>
