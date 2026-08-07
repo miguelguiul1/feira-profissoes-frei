@@ -8,6 +8,7 @@ import { ScheduleSection } from "@/components/landing/schedule-section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { ShareButtons } from "@/components/site/share-buttons";
 import { AGENDA, EVENT, FULL_ADDRESS, SITE_URL, SPEAKERS } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -71,12 +72,15 @@ function ProgramacaoPage() {
             title="Agenda interativa"
             description="Todas as atividades são gratuitas e não exigem inscrição prévia por atividade."
           />
-          <Button asChild variant="outline" className="rounded-full font-semibold text-primary">
-            <a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
-              <CalendarPlus className="h-4 w-4" aria-hidden="true" />
-              Adicionar ao Google Calendar
-            </a>
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="outline" className="rounded-full font-semibold text-primary">
+              <a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer">
+                <CalendarPlus className="h-4 w-4" aria-hidden="true" />
+                Adicionar ao Google Calendar
+              </a>
+            </Button>
+            <ShareButtons title={TITLE} text={DESCRIPTION} url={URL} />
+          </div>
         </div>
 
         <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">

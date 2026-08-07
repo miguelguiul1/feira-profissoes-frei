@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { CalendarDays, Clock, Instagram, Mail, MapPin, MessageCircle, Phone, Ticket } from "lucide-react";
 import { SiteLayout } from "@/components/site/site-layout";
 import { PageHero } from "@/components/site/page-hero";
 import { Section, SectionHeading, SurfaceCard } from "@/components/site/section";
@@ -10,7 +10,6 @@ const TITLE = "Contato e como chegar | 6ª Feira das Profissões FREI";
 const DESCRIPTION =
   "Fale com a secretaria do Instituto Social Nossa Senhora de Fátima por WhatsApp, telefone ou Instagram e veja como chegar à Feira das Profissões em Veleiros, São Paulo.";
 const URL = `${SITE_URL}/contato`;
-
 const MAP_SRC =
   "https://www.google.com/maps?q=Av.+Cel.+Octaviano+de+Freitas+Costa,+463+-+Veleiros,+S%C3%A3o+Paulo+-+SP,+04773-000&output=embed";
 
@@ -128,19 +127,26 @@ function ContatoPage() {
             </li>
           </ul>
 
-          <div>
-            <div className="overflow-hidden rounded-3xl shadow-card">
+          <div className="h-fit rounded-4xl bg-linear-to-br from-brand to-brand-deep p-5 shadow-card sm:p-7">
+            <h2 className="font-display text-xl font-bold text-primary-foreground">Como chegar à Feira das Profissões?</h2>
+            <p className="mt-2 text-sm text-primary-foreground/80">O Instituto fica em Veleiros, na zona sul de São Paulo.</p>
+            <div className="mt-5 overflow-hidden rounded-3xl">
               <iframe
                 title="Mapa com a localização do Instituto Social Nossa Senhora de Fátima"
                 src={MAP_SRC}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="h-96 w-full border-0 lg:h-[32rem]"
+                className="h-72 w-full border-0 sm:h-96"
               />
             </div>
+            <ul className="mt-5 grid gap-2 text-sm text-primary-foreground sm:grid-cols-2">
+              <li className="flex items-center gap-2 rounded-2xl bg-primary-foreground/15 px-4 py-3"><Ticket className="h-4 w-4 shrink-0" aria-hidden="true" />Evento gratuito</li>
+              <li className="flex items-center gap-2 rounded-2xl bg-primary-foreground/15 px-4 py-3"><CalendarDays className="h-4 w-4 shrink-0" aria-hidden="true" />{EVENT.dateLabel}</li>
+            </ul>
             <Button
               asChild
               size="lg"
+              variant="secondary"
               className="mt-5 w-full rounded-full font-semibold sm:w-auto sm:px-8"
             >
               <a

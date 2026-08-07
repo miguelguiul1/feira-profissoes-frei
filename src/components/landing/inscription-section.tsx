@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckSquare, Loader2, PartyPopper } from "lucide-react";
+import { CalendarPlus, CheckSquare, Download, Loader2, Mail, MessageCircle, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import alunosTurma from "@/assets/alunos-turma.jpg.asset.json";
+import inscriptionImage from "@/assets/Nova pasta/Formulário de inscrição.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -23,6 +23,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { inscriptionSchema, type InscriptionInput } from "@/lib/inscriptions.functions";
+import { ShareButtons } from "@/components/site/share-buttons";
+import { EVENT, FULL_ADDRESS, SITE_URL } from "@/lib/site-data";
 
 const SOURCES = [
   "Escola",
@@ -36,9 +38,13 @@ const SOURCES = [
 
 const COURSES = [
   "Curso Técnico de Informática",
-  "Curso Livre de Inglês",
-  "Eletromecânica de Autos",
   "Curso Técnico em Administração",
+  "Curso Técnico em Comunicação Visual",
+  "Curso de Qualificação Profissional em Eletromecânica de Autos",
+  "Curso de Qualificação Profissional em Automação Residencial e Robótica",
+  "Curso Livre de Inglês Básico ao Pré-Intermediário",
+  "Curso Livre de Informática Básica – Excel Avançado",
+  "Curso Livre de Eletricista Instalador",
   "Ainda não sei",
 ];
 
@@ -50,6 +56,9 @@ const BENEFITS = [
   "Visitação completa às instalações",
   "Networking com especialistas",
 ];
+
+const CALENDAR_URL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(EVENT.name)}&dates=20260919T120000Z/20260919T190000Z&details=${encodeURIComponent("Evento gratuito com palestras, oficinas e visitas guiadas.")}&location=${encodeURIComponent(FULL_ADDRESS)}`;
+const CONFIRMATION_TEXT = `Minha inscrição para a ${EVENT.name} está confirmada! Nos vemos em ${EVENT.dateLabel}, ${EVENT.timeLabel}, no endereço ${FULL_ADDRESS}.`;
 
 
 export function InscriptionSection() {
@@ -101,10 +110,10 @@ export function InscriptionSection() {
       aria-labelledby="inscricao-titulo"
     >
       <img
-        src={alunosTurma.url}
+        src={inscriptionImage}
         alt="Turma de alunos do Instituto Social Nossa Senhora de Fátima"
         loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-15"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-15"
       />
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
@@ -124,16 +133,23 @@ export function InscriptionSection() {
                 <PartyPopper className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
                 <div>
                   <p className="font-semibold text-primary">Inscrição confirmada!</p>
-                  <p className="mt-1 text-sm text-foreground/80">
-                    Recebemos os seus dados. Nos vemos no dia 19 de setembro de 2026.
-                  </p>
-                  <Button
-                    variant="outline"
-                    className="mt-4 rounded-full border-primary text-primary hover:bg-accent"
-                    onClick={() => setSubmitted(false)}
-                  >
-                    Inscrever outra pessoa
-                  </Button>
+                  <p className="mt-1 text-sm text-foreground/80">Recebemos os seus dados. Nos vemos no dia 19 de setembro de 2026.</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Button asChild variant="outline" className="rounded-full border-primary text-primary hover:bg-accent">
+                      <a href={CALENDAR_URL} target="_blank" rel="noopener noreferrer"><CalendarPlus className="h-4 w-4" aria-hidden="true" />Adicionar à agenda</a>
+                    </Button>
+                    <Button asChild variant="outline" className="rounded-full border-primary text-primary hover:bg-accent">
+                      <a href="/guia-do-visitante.txt" download><Download className="h-4 w-4" aria-hidden="true" />Baixar guia</a>
+                    </Button>
+                    <Button asChild variant="outline" className="rounded-full border-primary text-primary hover:bg-accent">
+                      <a href={`https://wa.me/?text=${encodeURIComponent(CONFIRMATION_TEXT)}`} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-4 w-4" aria-hidden="true" />Enviar no WhatsApp</a>
+                    </Button>
+                    <Button asChild variant="outline" className="rounded-full border-primary text-primary hover:bg-accent">
+                      <a href={`mailto:?subject=${encodeURIComponent("Inscrição confirmada — Feira das Profissões")}&body=${encodeURIComponent(CONFIRMATION_TEXT)}`}><Mail className="h-4 w-4" aria-hidden="true" />Enviar por e-mail</a>
+                    </Button>
+                    <ShareButtons title="Vou à 6ª Feira das Profissões FREI" text="Minha inscrição está confirmada. Participe também!" url={`${SITE_URL}/inscricao`} />
+                    <Button variant="outline" className="rounded-full border-primary text-primary hover:bg-accent" onClick={() => setSubmitted(false)}>Inscrever outra pessoa</Button>
+                  </div>
                 </div>
               </div>
             ) : (

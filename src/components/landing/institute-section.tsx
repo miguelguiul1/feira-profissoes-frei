@@ -1,6 +1,6 @@
 import { Building2, Laptop, Projector } from "lucide-react";
-import freiXavier from "@/assets/frei-xavier.jpg.asset.json";
-import fachadaInstituto from "@/assets/fachada-instituto.jpg.asset.json";
+import freiXavier from "@/assets/Nova pasta/Frei.png";
+import fachadaInstituto from "@/assets/Nova pasta/O nosso instituto.png";
 
 const STRUCTURE = [
   {
@@ -23,17 +23,21 @@ const STRUCTURE = [
 export function InstituteSection() {
   return (
     <section
-      className="relative overflow-hidden bg-linear-to-b from-brand-soft via-brand-tint to-secondary py-16 lg:py-24"
+      className="relative isolate overflow-hidden bg-linear-to-b from-brand-soft via-brand-tint to-secondary py-16 lg:py-24"
       aria-labelledby="instituto-titulo"
     >
       <img
-        src={fachadaInstituto.url}
+        src={fachadaInstituto}
         alt=""
         aria-hidden="true"
         loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-10"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover object-center"
+        style={{
+          maskImage: "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.18) 26%, rgba(0, 0, 0, 0.6) 58%, black 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.18) 26%, rgba(0, 0, 0, 0.6) 58%, black 100%)",
+        }}
       />
-      <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
         <div className="text-center">
           <h2
             id="instituto-titulo"
@@ -45,12 +49,12 @@ export function InstituteSection() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-          <article className="rounded-4xl bg-card p-7 shadow-card">
+          <article className="rounded-4xl bg-card/95 p-7 shadow-card ring-1 ring-primary/10 backdrop-blur-sm">
             <img
-              src={fachadaInstituto.url}
+              src={fachadaInstituto}
               alt="Fachada do Instituto Social Nossa Senhora de Fátima"
               loading="lazy"
-              className="aspect-[16/9] w-full rounded-3xl object-cover"
+              className="aspect-[16/9] w-full rounded-3xl object-cover object-center"
             />
             <h3 className="mt-5 font-display text-xl font-bold text-primary">
               Mais de 50 anos formando gerações
@@ -64,9 +68,9 @@ export function InstituteSection() {
             </p>
           </article>
 
-          <article className="grid content-center gap-6 rounded-4xl bg-background/55 p-7 shadow-soft ring-1 ring-primary/10 backdrop-blur-md sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
+          <article className="grid content-center gap-6 rounded-4xl bg-background/80 p-7 shadow-soft ring-1 ring-primary/15 backdrop-blur-md sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
             <img
-              src={freiXavier.url}
+              src={freiXavier}
               alt="Frei Xavier, idealizador do Instituto"
               loading="lazy"
               className="h-32 w-32 shrink-0 rounded-3xl object-cover"

@@ -36,16 +36,18 @@ function ParceirosPage() {
         title="Quem caminha junto com o Instituto"
         description={`${PARTNERS.length} organizações apoiam nossos cursos, estágios e a realização da Feira das Profissões.`}
         showEventMeta={false}
+        showCta={false}
       />
 
       <PartnersSection />
 
-      <Section tone="default">
+      <Section id="seja-parceiro" tone="default">
         <SurfaceCard className="flex flex-col gap-4 p-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
             <SectionHeading
-              title="Quer ser parceiro?"
-              description="Apoie a formação gratuita de jovens e adultos na zona sul de São Paulo."
+              eyebrow="Parcerias"
+              title="Sua organização quer apoiar a feira?"
+              description="Fale com a organização para conhecer formas de apoiar a formação gratuita de jovens e adultos."
               level={2}
             />
           </div>

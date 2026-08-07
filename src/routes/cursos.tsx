@@ -8,7 +8,7 @@ import { CERTIFICATIONS, COURSES, SITE_URL } from "@/lib/site-data";
 
 const TITLE = "Cursos gratuitos | 6ª Feira das Profissões FREI";
 const DESCRIPTION =
-  "Conheça os cursos técnicos e livres gratuitos do Instituto Social Nossa Senhora de Fátima: Informática, Inglês, Eletromecânica de Autos e Administração.";
+  "Conheça os oito cursos técnicos, de qualificação e livres gratuitos do Instituto Social Nossa Senhora de Fátima.";
 const URL = `${SITE_URL}/cursos`;
 
 export const Route = createFileRoute("/cursos")({
@@ -33,7 +33,7 @@ function CursosPage() {
       <PageHero
         eyebrow="Cursos"
         title="Formação gratuita que abre portas"
-        description="Quatro cursos com carga horária robusta, aulas práticas e certificado. Todos gratuitos e abertos à comunidade."
+        description="Oito cursos com carga horária robusta, aulas práticas e certificado. Todos gratuitos e abertos à comunidade."
         showEventMeta={false}
       />
 

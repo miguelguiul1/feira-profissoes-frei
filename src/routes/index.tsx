@@ -4,9 +4,11 @@ import { SiteLayout } from "@/components/site/site-layout";
 import { Section, SectionHeading, SurfaceCard } from "@/components/site/section";
 import { HeroCarousel } from "@/components/landing/hero-carousel";
 import { CoursesSection } from "@/components/landing/courses-section";
+import { InstituteSection } from "@/components/landing/institute-section";
 import { ReasonsSection } from "@/components/landing/reasons-section";
 import { PartnersSection } from "@/components/landing/partners-section";
 import { Button } from "@/components/ui/button";
+import { NewsletterForm } from "@/components/site/newsletter-form";
 import {
   Accordion,
   AccordionContent,
@@ -59,6 +61,8 @@ export const Route = createFileRoute("/")({
               endDate: EVENT.endDate,
               eventStatus: "https://schema.org/EventScheduled",
               eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+              isAccessibleForFree: true,
+              inLanguage: "pt-BR",
               description: DESCRIPTION,
               url: SITE_URL,
               organizer: { "@type": "Organization", name: EVENT.organizer, url: SITE_URL },
@@ -88,7 +92,9 @@ function Home() {
     <SiteLayout>
       <HeroCarousel />
 
-      <Section tone="default" labelledBy="numeros-titulo">
+      <InstituteSection />
+
+      <Section tone="gradient" labelledBy="numeros-titulo">
         <SectionHeading
           id="numeros-titulo"
           eyebrow="O Instituto em números"
@@ -182,6 +188,17 @@ function Home() {
       </Section>
 
       <PartnersSection />
+
+      <Section tone="gradient" labelledBy="novidades-titulo">
+        <div className="grid gap-6 rounded-4xl bg-brand p-6 text-primary-foreground shadow-card sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,.85fr)] lg:items-center">
+          <div>
+            <p className="text-sm font-bold tracking-wide text-primary-foreground/75 uppercase">Fique por dentro</p>
+            <h2 id="novidades-titulo" className="mt-2 font-display text-2xl font-extrabold sm:text-3xl">Receba as novidades da feira</h2>
+            <p className="mt-3 text-sm leading-relaxed text-primary-foreground/85">Avisaremos quando houver novidades na programação, materiais e oportunidades dos parceiros.</p>
+          </div>
+          <NewsletterForm />
+        </div>
+      </Section>
 
       <Section tone="soft" className="text-center">
         <SectionHeading

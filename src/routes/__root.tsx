@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import socialImage from "@/assets/robotica-alunos-2.png.asset.json";
 
 function NotFoundComponent() {
   return (
@@ -86,7 +87,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Instituto Social Nossa Senhora de Fátima" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:image", content: socialImage.url },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: socialImage.url },
+      { name: "robots", content: "index, follow" },
     ],
     links: [
       {
@@ -111,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
@@ -134,4 +139,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

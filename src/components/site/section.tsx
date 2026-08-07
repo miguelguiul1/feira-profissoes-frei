@@ -4,11 +4,11 @@ import { cn } from "@/lib/utils";
 type Tone = "default" | "muted" | "soft" | "brand" | "gradient";
 
 const TONE: Record<Tone, string> = {
-  default: "bg-background",
-  muted: "bg-muted",
-  soft: "bg-brand-soft",
+  default: "bg-background/95",
+  muted: "bg-linear-to-b from-muted to-background",
+  soft: "bg-linear-to-b from-brand-soft via-background to-brand-soft",
   brand: "bg-brand text-primary-foreground",
-  gradient: "bg-linear-to-b from-background to-brand-soft",
+  gradient: "relative overflow-hidden bg-linear-to-b from-background via-brand-soft to-background",
 };
 
 /** Faixa de seção padrão: espaçamento, largura máxima e tom de fundo consistentes. */
@@ -103,7 +103,7 @@ export function SurfaceCard({
   return (
     <div
       className={cn(
-        "rounded-3xl bg-card p-6 shadow-soft ring-1 ring-border/60",
+        "rounded-3xl bg-card/95 p-6 shadow-soft ring-1 ring-border/60 backdrop-blur-sm",
         interactive &&
           "transition-transform duration-200 hover:-translate-y-1 hover:shadow-card motion-reduce:transform-none motion-reduce:transition-none",
         className,

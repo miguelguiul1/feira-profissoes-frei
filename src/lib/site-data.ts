@@ -1,7 +1,11 @@
-import cursoInformatica from "@/assets/curso-informatica-2.png.asset.json";
-import cursoIngles from "@/assets/curso-ingles.png.asset.json";
-import cursoEletromecanica from "@/assets/curso-eletromecanica.png.asset.json";
-import cursoAdministracao from "@/assets/curso-administracao.png.asset.json";
+import cursoInformatica from "@/assets/Nova pasta/Curso de informatica.png";
+import cursoIngles from "@/assets/Nova pasta/Curso de ingles.png";
+import cursoEletromecanica from "@/assets/Nova pasta/Curso de eletromecanica.png";
+import cursoAdministracao from "@/assets/Nova pasta/Curso de adm.png";
+import cursoComunicacaoVisual from "@/assets/Nova pasta/Curso Técnico em Comunicação Visual.png";
+import cursoAutomacao from "@/assets/Nova pasta/Curso de Qualificação Profissional em Automação Residencial e Robótica.png";
+import cursoEletricista from "@/assets/Nova pasta/Curso Livre de Eletricista Instalador.png";
+import cursoExcel from "@/assets/Nova pasta/Curso de Informatica básica - Excel.png";
 
 export const SITE_URL = "https://feira-das-profissoes.lovable.app";
 
@@ -31,7 +35,7 @@ export const NAV_LINKS = [
   { to: "/", label: "Início" },
   { to: "/programacao", label: "Programação" },
   { to: "/cursos", label: "Cursos" },
-  { to: "/expositores", label: "Expositores" },
+  { to: "/expositores", label: "Mostras dos cursos" },
   { to: "/instituicao", label: "Instituição" },
   { to: "/parceiros", label: "Parceiros" },
   { to: "/faq", label: "FAQ" },
@@ -51,36 +55,76 @@ export interface CourseInfo {
 
 export const COURSES: CourseInfo[] = [
   {
+    slug: "comunicacao-visual",
+    title: "Curso Técnico em Comunicação Visual",
+    short: "Design, criatividade e comunicação.",
+    description: "Formação técnica para criar peças visuais, materiais gráficos e projetos de comunicação com ferramentas e práticas do mercado.",
+    hours: "880 horas",
+    duration: "1 ano — Segunda à sexta",
+    image: cursoComunicacaoVisual,
+    topics: ["Design gráfico", "Comunicação visual", "Criação de peças", "Ferramentas digitais"],
+  },
+  {
+    slug: "automacao-robotica",
+    title: "Curso de Qualificação Profissional em Automação Residencial e Robótica",
+    short: "Automação, sensores e projetos de robótica.",
+    description: "Qualificação prática para conhecer automação residencial, componentes eletrônicos, sensores e projetos de robótica.",
+    hours: "880 horas",
+    duration: "1 ano — Segunda à sexta",
+    image: cursoAutomacao,
+    topics: ["Automação residencial", "Robótica", "Sensores", "Projetos práticos"],
+  },
+  {
+    slug: "informatica-basica-excel",
+    title: "Curso Livre de Informática Básica – Excel Avançado",
+    short: "Informática para o dia a dia e Excel avançado.",
+    description: "Curso livre para desenvolver segurança no uso do computador e aplicar recursos avançados do Excel em situações reais.",
+    hours: "120 horas",
+    duration: "5 meses — Segunda, quarta e quinta",
+    image: cursoExcel,
+    topics: ["Informática básica", "Planilhas", "Excel avançado", "Produtividade"],
+  },
+  {
+    slug: "eletricista-instalador",
+    title: "Curso Livre de Eletricista Instalador",
+    short: "Instalações elétricas e segurança.",
+    description: "Curso livre com fundamentos de instalações elétricas, leitura de circuitos e práticas de segurança.",
+    hours: "120 horas",
+    duration: "5 meses — Segunda e quinta",
+    image: cursoEletricista,
+    topics: ["Instalações elétricas", "Circuitos", "Segurança", "Prática profissional"],
+  },
+  {
     slug: "informatica",
     title: "Curso Técnico de Informática",
     short: "TI, Programação e Criação de Sites.",
     description:
       "Formação técnica completa em tecnologia da informação, com lógica de programação, desenvolvimento web, banco de dados, redes e noções de cibersegurança.",
     hours: "1.000h",
-    duration: "1 ano — segunda a sexta",
-    image: cursoInformatica.url,
+    duration: "1 ano — Segunda à sexta",
+    image: cursoInformatica,
     topics: ["Lógica de programação", "Desenvolvimento web", "Banco de dados", "Redes e segurança"],
   },
   {
     slug: "ingles",
-    title: "Curso Livre de Inglês",
+    title: "Curso Livre de Inglês Básico ao Pré-Intermediário",
     short: "Comunicação, gramática e conversação.",
     description:
       "Do básico ao pré-intermediário em um ano superintensivo, com foco em conversação, compreensão auditiva e inglês aplicado ao mercado de trabalho.",
     hours: "400h",
-    duration: "1 ano superintensivo",
-    image: cursoIngles.url,
+    duration: "1 ano superintensivo — Segunda a sexta",
+    image: cursoIngles,
     topics: ["Conversação", "Gramática aplicada", "Listening", "Inglês profissional"],
   },
   {
     slug: "eletromecanica",
-    title: "Eletromecânica de Autos",
+    title: "Curso de Qualificação Profissional em Eletromecânica de Autos",
     short: "Elétrica automotiva, mecânica e diagnóstico.",
     description:
       "Prática em oficina-escola com motores, sistemas elétricos, injeção eletrônica e diagnóstico com equipamentos usados no mercado automotivo.",
     hours: "880h",
-    duration: "1 ano — segunda a sexta",
-    image: cursoEletromecanica.url,
+    duration: "1 ano — Segunda à sexta",
+    image: cursoEletromecanica,
     topics: ["Motores", "Elétrica automotiva", "Injeção eletrônica", "Diagnóstico"],
   },
   {
@@ -90,8 +134,8 @@ export const COURSES: CourseInfo[] = [
     description:
       "Formação em rotinas administrativas, gestão de pessoas, controle de estoques, logística, legislação e marketing para o primeiro emprego.",
     hours: "1.000h",
-    duration: "1 ano — segunda a sexta",
-    image: cursoAdministracao.url,
+    duration: "1 ano — Segunda à sexta",
+    image: cursoAdministracao,
     topics: ["Rotinas administrativas", "Gestão de pessoas", "Logística", "Marketing"],
   },
 ];
@@ -283,7 +327,7 @@ export const TESTIMONIALS: Testimonial[] = [
 export const STATS = [
   { value: "55", label: "anos de história", detail: "Fundado em 1971 por Frei Xavier" },
   { value: "+20 mil", label: "alunos formados", detail: "Gerações transformadas pela educação" },
-  { value: "4", label: "cursos gratuitos", detail: "Técnicos e livres, com certificado" },
+  { value: "8", label: "cursos gratuitos", detail: "Técnicos, de qualificação e livres" },
   { value: "6ª", label: "edição da feira", detail: "Evento aberto a toda a comunidade" },
 ];
 

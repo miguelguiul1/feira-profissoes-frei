@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://feira-das-profissoes.lovable.app/sitemap.xml

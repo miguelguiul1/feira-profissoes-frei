@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { Link } from "@tanstack/react-router";
 import { Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { MediaPlaceholder } from "./media-placeholder";
-import roboticaAlunos from "@/assets/robotica-alunos-2.png.asset.json";
-import exAlunoRicardo from "@/assets/ex-aluno-ricardo.png.asset.json";
+import heroImage from "@/assets/Nova pasta/Carrossel do inicio.png";
+import exAlunoRicardo from "@/assets/Nova pasta/Carrossel do inicioCarrossel do inicio.png";
 import { PARTNERS } from "./partners";
 import { cn } from "@/lib/utils";
 
@@ -33,14 +33,15 @@ export function HeroCarousel() {
   }, [emblaApi, onSelect]);
 
   return (
-    <section id="inicio" className="bg-surface pb-10" aria-label="Destaques da feira">
+    <section id="inicio" className="relative overflow-hidden bg-linear-to-b from-brand-soft via-surface to-background pb-10" aria-label="Destaques da feira">
       <div className="mx-auto max-w-7xl px-4 pt-6 lg:px-8">
         <div className="overflow-hidden rounded-3xl" ref={emblaRef}>
           <div className="flex">
             {/* Slide 1 */}
             <div className="min-w-0 flex-[0_0_100%]">
-              <div className="grid items-center gap-8 rounded-3xl bg-brand-soft p-6 shadow-card sm:p-10 lg:grid-cols-2 lg:p-14">
-                <div>
+              <div className="relative grid min-h-[450px] items-center gap-8 overflow-hidden rounded-4xl bg-brand-soft p-6 shadow-card ring-1 ring-primary/10 sm:p-10 lg:min-h-[470px] lg:grid-cols-2 lg:p-14">
+                <div className="absolute inset-y-0 right-0 hidden w-3/5 bg-linear-to-l from-background/30 via-background/5 to-transparent lg:block" aria-hidden="true" />
+                <div className="relative z-10">
                   <span className="inline-flex rounded-full bg-primary px-4 py-1.5 text-xs font-bold tracking-wide text-primary-foreground uppercase">
                     19 de setembro de 2026
                   </span>
@@ -51,27 +52,18 @@ export function HeroCarousel() {
                     Descubra hoje a profissão do seu amanhã!
                   </p>
                   <div className="mt-7 flex flex-wrap gap-3">
-                    <Button
-                      size="lg"
-                      className="rounded-full px-7 font-semibold"
-                      onClick={() => scrollToId("#inscricao")}
-                    >
-                      Fazer Inscrição
+                    <Button asChild size="lg" className="rounded-full px-7 font-semibold">
+                      <Link to="/inscricao">Fazer Inscrição</Link>
                     </Button>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="rounded-full border-primary bg-background px-7 font-semibold text-primary hover:bg-accent"
-                      onClick={() => scrollToId("#programacao")}
-                    >
-                      Programação
+                    <Button asChild size="lg" variant="outline" className="rounded-full border-primary bg-background px-7 font-semibold text-primary hover:bg-accent">
+                      <Link to="/programacao">Programação</Link>
                     </Button>
                   </div>
                 </div>
                 <img
-                  src={roboticaAlunos.url}
+                  src={heroImage}
                   alt="Alunos do Instituto apresentando projetos de robótica"
-                  className="aspect-[4/3] w-full rounded-2xl object-cover shadow-soft"
+                  className="relative z-10 aspect-[3/2] w-full rounded-3xl object-cover object-center shadow-card ring-4 ring-background/65"
                 />
 
               </div>
@@ -79,41 +71,25 @@ export function HeroCarousel() {
 
             {/* Slide 2 */}
             <div className="min-w-0 flex-[0_0_100%]">
-              <div className="rounded-3xl bg-brand p-6 shadow-card sm:p-10 lg:p-14">
+              <div className="flex min-h-[450px] flex-col justify-center rounded-4xl bg-linear-to-br from-brand to-brand-deep p-6 shadow-card ring-1 ring-primary-foreground/15 sm:p-10 lg:min-h-[470px] lg:p-14">
                 <h2 className="font-display text-2xl font-extrabold text-primary-foreground sm:text-3xl">
                   Nossos Parceiros
                 </h2>
                 <p className="mt-2 text-sm text-primary-foreground/80">
                   Empresas e instituições que caminham com o Frei.
                 </p>
-                <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {PARTNERS.map((partner) =>
-                    partner.logo ? (
-                      <div
-                        key={partner.name}
-                        className="flex h-20 items-center justify-center rounded-xl bg-background p-2"
-                      >
-                        <img
-                          src={partner.logo}
-                          alt={`Logo ${partner.name}`}
-                          loading="lazy"
-                          className="max-h-full max-w-full object-contain"
-                        />
-                      </div>
-                    ) : (
-                      <MediaPlaceholder
-                        key={partner.name}
-                        tone="dark"
-                        label={partner.name}
-                        className="h-20 rounded-xl"
-                      />
-                    ),
-                  )}
+                <div className="mt-7 grid grid-cols-3 gap-3 sm:grid-cols-6">
+                  {PARTNERS.slice(0, 6).map((partner) => (
+                    <div key={partner.name} className="mx-auto flex aspect-square w-full max-w-[92px] items-center justify-center rounded-2xl bg-background p-3 shadow-soft">
+                      <img src={partner.logo} alt={`Logo ${partner.name}`} loading="lazy" className="max-h-full max-w-full object-contain" />
+                    </div>
+                  ))}
                 </div>
                 <Button
+                  size="lg"
                   variant="outline"
-                  className="mt-7 rounded-full border-primary-foreground/60 bg-transparent px-7 font-semibold text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground"
-                  onClick={() => scrollToId("#parceiros")}
+                  className="mt-7 w-fit self-center rounded-full border-primary-foreground/60 bg-transparent px-7 font-semibold text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground"
+                  onClick={() => scrollToId("#parceiros-lista")}
                 >
                   Lista completa
                 </Button>
@@ -122,35 +98,38 @@ export function HeroCarousel() {
 
             {/* Slide 3 */}
             <div className="min-w-0 flex-[0_0_100%]">
-              <div className="rounded-3xl bg-brand-soft p-6 shadow-card sm:p-10 lg:p-14">
+              <div className="flex min-h-[450px] flex-col justify-center rounded-4xl bg-linear-to-br from-brand-soft via-background to-brand-tint p-6 shadow-card ring-1 ring-primary/10 sm:p-10 lg:min-h-[470px] lg:p-14">
                 <h2 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
                   Depoimentos
                 </h2>
-                <div className="mt-6 grid gap-6 rounded-2xl bg-background p-6 shadow-soft sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
+                <div className="mx-auto mt-6 grid w-full max-w-4xl gap-6 rounded-3xl bg-background p-6 shadow-card sm:grid-cols-[auto_minmax(0,1fr)] sm:p-8 sm:items-center">
                   <img
-                    src={exAlunoRicardo.url}
+                    src={exAlunoRicardo}
                     alt="Retrato de Ricardo Hessel de Araújo, ex-aluno do Instituto"
                     loading="lazy"
-                    className="h-28 w-28 shrink-0 rounded-full bg-brand-tint object-cover object-top"
+                    className="h-32 w-32 shrink-0 rounded-3xl bg-brand-tint object-cover object-top shadow-soft sm:h-36 sm:w-36"
                   />
 
                   <blockquote className="min-w-0">
                     <Quote className="h-6 w-6 text-primary" aria-hidden="true" />
-                    <p className="mt-2 text-base text-foreground/85 italic">
-                      “O Frei me deu a base técnica e humana que eu carrego até hoje. Foi ali que a
-                      minha carreira começou.”
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/85 sm:text-base">
+                      “Estudar aqui foi um divisor de águas na minha vida. A escola não só me deu
+                      base técnica, mas contribuiu diretamente para a formação profissional e do
+                      cidadão que sou hoje. Foi aqui que tive meu primeiro direcionamento e minha
+                      primeira oportunidade no mercado de trabalho, que marcou o início da minha trajetória.”
                     </p>
-                    <footer className="mt-4 text-sm font-semibold text-primary">
+                    <footer className="mt-5 text-sm font-semibold text-primary">
                       Ricardo Hessel de Araújo
                       <span className="block font-normal text-muted-foreground">
-                        Ex-aluno de Informática (2006) — Diretor Executivo no BTG Pactual
+                        Ex-aluno de Informática, 2006 — Diretor Executivo no BTG Pactual
                       </span>
                     </footer>
                   </blockquote>
                 </div>
                 <Button
-                  className="mt-7 rounded-full px-7 font-semibold"
-                  onClick={() => scrollToId("#galeria")}
+                  size="lg"
+                  className="mt-7 w-fit self-center rounded-full px-7 font-semibold"
+                  onClick={() => scrollToId("#depoimentos-titulo")}
                 >
                   Mais Depoimentos
                 </Button>

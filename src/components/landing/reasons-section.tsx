@@ -6,7 +6,7 @@ import {
   Rocket,
   Target,
 } from "lucide-react";
-import equipeInstituto from "@/assets/equipe-instituto.jpg.asset.json";
+import traditionBanner from "@/assets/Nova pasta/Tradição que atravessa gerações!.png";
 
 const REASONS = [
   {
@@ -44,7 +44,7 @@ const REASONS = [
 export function ReasonsSection() {
   return (
     <section
-      className="bg-linear-to-b from-brand-soft via-brand-tint to-brand py-16 lg:py-24"
+      className="relative overflow-hidden bg-linear-to-b from-brand-soft via-brand-tint to-brand py-16 lg:py-24"
       aria-labelledby="motivos-titulo"
     >
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
@@ -59,7 +59,7 @@ export function ReasonsSection() {
           {REASONS.map(({ icon: Icon, title, text }) => (
             <article
               key={title}
-              className="rounded-4xl bg-card p-7 shadow-soft transition-shadow hover:shadow-card"
+              className="rounded-4xl bg-card/95 p-7 shadow-soft ring-1 ring-primary/10 transition-all hover:-translate-y-1 hover:shadow-card"
             >
               <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-tint text-primary">
                 <Icon className="h-6 w-6" aria-hidden="true" />
@@ -70,7 +70,7 @@ export function ReasonsSection() {
           ))}
         </div>
 
-        <div className="mt-12 grid items-center gap-8 rounded-4xl bg-brand-soft p-8 shadow-card sm:p-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="mt-12 grid items-center gap-8 overflow-hidden rounded-4xl bg-brand-soft p-8 shadow-card ring-1 ring-primary/15 sm:p-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div className="min-w-0">
             <h3 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
               Tradição que atravessa gerações!
@@ -80,10 +80,10 @@ export function ReasonsSection() {
             </p>
           </div>
           <img
-            src={equipeInstituto.url}
-            alt="Equipe completa do Frei reunida no auditório"
+            src={traditionBanner}
+            alt="Tradição que atravessa gerações no Instituto Social Nossa Senhora de Fátima"
             loading="lazy"
-            className="aspect-[16/9] w-full rounded-3xl object-cover shadow-soft"
+            className="aspect-[11/4] w-full rounded-3xl object-cover object-center shadow-soft"
           />
         </div>
       </div>

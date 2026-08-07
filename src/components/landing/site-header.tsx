@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import logoAsset from "@/assets/logo-frei.png.asset.json";
+import logoAsset from "@/assets/Nova pasta/logo.png";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/lib/site-data";
@@ -35,7 +35,7 @@ export function SiteHeader({ onOpenAdmin }: { onOpenAdmin: () => void }) {
           className="flex min-w-0 items-center gap-3 rounded-full focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <img
-            src={logoAsset.url}
+            src={logoAsset}
             alt="Instituto Social Nossa Senhora de Fátima — 6ª Feira das Profissões"
             className="h-11 w-11 shrink-0 rounded-full object-contain"
             width={44}
