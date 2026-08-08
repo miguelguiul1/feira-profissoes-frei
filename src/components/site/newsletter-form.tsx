@@ -1,29 +1,32 @@
 import { useState } from "react";
 import { Mail, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { newsletterSchema, subscribeNewsletter } from "@/lib/newsletter.functions";
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const subscribe = useServerFn(subscribeNewsletter);
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const normalizedEmail = email.trim().toLowerCase();
-    if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
+    const parsed = newsletterSchema.safeParse({ email });
+    if (!parsed.success) {
       toast.error("Informe um e-mail válido.");
       return;
     }
     setLoading(true);
-    const { error } = await supabase.from("newsletter_subscribers").upsert({ email: normalizedEmail }, { onConflict: "email", ignoreDuplicates: true });
-    setLoading(false);
-    if (error) {
+    try {
+      await subscribe({ data: parsed.data });
+      setEmail("");
+      toast.success("Pronto! Você receberá as novidades da feira.");
+    } catch {
       toast.error("Não foi possível cadastrar seu e-mail. Tente novamente.");
-      return;
+    } finally {
+      setLoading(false);
     }
-    setEmail("");
-    toast.success("Pronto! Você receberá as novidades da feira.");
   };
 
   return (

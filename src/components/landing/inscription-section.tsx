@@ -3,7 +3,7 @@ import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarPlus, CheckSquare, Download, Loader2, Mail, MessageCircle, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
 import inscriptionImage from "@/assets/Nova pasta/Formulário de inscrição.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { inscriptionSchema, type InscriptionInput } from "@/lib/inscriptions.functions";
+import { createInscription, inscriptionSchema, type InscriptionInput } from "@/lib/inscriptions.functions";
 import { ShareButtons } from "@/components/site/share-buttons";
 import { EVENT, FULL_ADDRESS, SITE_URL } from "@/lib/site-data";
 
@@ -63,6 +63,7 @@ const CONFIRMATION_TEXT = `Minha inscrição para a ${EVENT.name} está confirma
 
 export function InscriptionSection() {
   const [submitted, setSubmitted] = useState(false);
+  const submitInscription = useServerFn(createInscription);
 
   const form = useForm<InscriptionInput>({
     resolver: zodResolver(inscriptionSchema) as Resolver<InscriptionInput>,
@@ -80,18 +81,9 @@ export function InscriptionSection() {
   });
 
   const onSubmit = async (values: InscriptionInput) => {
-    const { error } = await supabase.from("inscriptions").insert({
-      full_name: values.full_name,
-      phone: values.phone,
-      email: values.email,
-      education_level: "Não informado",
-      is_former_student: values.is_former_student === "sim",
-      course_interest: values.course_interest,
-      how_found_out: values.how_found_out || null,
-      estimated_arrival: values.estimated_arrival || null,
-    });
-
-    if (error) {
+    try {
+      await submitInscription({ data: values });
+    } catch {
       toast.error("Não foi possível enviar a inscrição. Tente novamente.");
       return;
     }
