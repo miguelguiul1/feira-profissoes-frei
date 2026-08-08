@@ -63,6 +63,7 @@ const CONFIRMATION_TEXT = `Minha inscrição para a ${EVENT.name} está confirma
 
 export function InscriptionSection() {
   const [submitted, setSubmitted] = useState(false);
+  const submitInscription = useServerFn(createInscription);
 
   const form = useForm<InscriptionInput>({
     resolver: zodResolver(inscriptionSchema) as Resolver<InscriptionInput>,
@@ -80,18 +81,9 @@ export function InscriptionSection() {
   });
 
   const onSubmit = async (values: InscriptionInput) => {
-    const { error } = await supabase.from("inscriptions").insert({
-      full_name: values.full_name,
-      phone: values.phone,
-      email: values.email,
-      education_level: "Não informado",
-      is_former_student: values.is_former_student === "sim",
-      course_interest: values.course_interest,
-      how_found_out: values.how_found_out || null,
-      estimated_arrival: values.estimated_arrival || null,
-    });
-
-    if (error) {
+    try {
+      await submitInscription({ data: values });
+    } catch {
       toast.error("Não foi possível enviar a inscrição. Tente novamente.");
       return;
     }
