@@ -3,7 +3,7 @@ import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarPlus, CheckSquare, Download, Loader2, Mail, MessageCircle, PartyPopper } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
 import inscriptionImage from "@/assets/Nova pasta/Formulário de inscrição.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
