@@ -19,9 +19,9 @@ export const inscriptionSchema = z.object({
     .trim()
     .email({ message: "E-mail inválido." })
     .max(255, { message: "Máximo de 255 caracteres." }),
-  
+
   is_former_student: z.enum(["sim", "nao"], { message: "Selecione uma opção." }),
-  course_interest: z.string().trim().min(1, { message: "Selecione um curso." }),
+  course_interest: z.string().trim().min(1, { message: "Selecione um curso." }).max(160),
   how_found_out: z.string().trim().max(120).optional().or(z.literal("")),
   estimated_arrival: z.string().trim().max(120).optional().or(z.literal("")),
 });
@@ -41,9 +41,53 @@ export interface InscriptionRow {
   estimated_arrival: string | null;
 }
 
+/**
+ * Escrita de PII feita exclusivamente no servidor: o navegador nunca insere
+ * diretamente na tabela. Validação Zod estrita antes de persistir.
+ */
+export const createInscription = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => inscriptionSchema.parse(input))
+  .handler(async ({ data }): Promise<{ ok: true }> => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { error } = await supabaseAdmin.from("inscriptions").insert({
+      full_name: data.full_name,
+      phone: data.phone,
+      email: data.email.toLowerCase(),
+      education_level: "Não informado",
+      is_former_student: data.is_former_student === "sim",
+      course_interest: data.course_interest,
+      how_found_out: data.how_found_out ? data.how_found_out : null,
+      estimated_arrival: data.estimated_arrival ? data.estimated_arrival : null,
+    });
+
+    if (error) {
+      // Nunca expor detalhes internos do banco ao usuário final.
+      console.error("[inscriptions] insert failed", error);
+      throw new Error("Não foi possível registrar a inscrição.");
+    }
+
+    return { ok: true };
+  });
+
+/** Leitura de PII: exige sessão válida E papel admin/staff verificado no servidor. */
 export const listInscriptions = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }): Promise<InscriptionRow[]> => {
+    const [admin, staff] = await Promise.all([
+      context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" }),
+      context.supabase.rpc("has_role", { _user_id: context.userId, _role: "staff" }),
+    ]);
+
+    if (admin.error || staff.error) {
+      console.error("[inscriptions] role check failed", admin.error ?? staff.error);
+      throw new Error("Não foi possível validar suas permissões.");
+    }
+
+    if (!admin.data && !staff.data) {
+      throw new Error("Acesso negado.");
+    }
+
     const { data, error } = await context.supabase
       .from("inscriptions")
       .select(
@@ -51,6 +95,9 @@ export const listInscriptions = createServerFn({ method: "GET" })
       )
       .order("created_at", { ascending: false });
 
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("[inscriptions] list failed", error);
+      throw new Error("Não foi possível carregar as inscrições.");
+    }
     return (data ?? []) as InscriptionRow[];
   });
