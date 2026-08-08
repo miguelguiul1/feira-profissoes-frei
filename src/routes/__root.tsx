@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
+import { AppErrorBoundary } from "@/components/site/error-boundary";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import socialImage from "@/assets/robotica-alunos-2.png.asset.json";
 
@@ -133,8 +134,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <AppErrorBoundary>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </AppErrorBoundary>
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
   );
