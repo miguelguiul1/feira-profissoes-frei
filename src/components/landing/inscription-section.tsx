@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { inscriptionSchema, type InscriptionInput } from "@/lib/inscriptions.functions";
+import { createInscription, inscriptionSchema, type InscriptionInput } from "@/lib/inscriptions.functions";
 import { ShareButtons } from "@/components/site/share-buttons";
 import { EVENT, FULL_ADDRESS, SITE_URL } from "@/lib/site-data";
 
