@@ -21,6 +21,8 @@ import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminCredenciamentoRouteImport } from './routes/_authenticated/admin/credenciamento'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -81,6 +83,17 @@ const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminCredenciamentoRoute =
+  AuthenticatedAdminCredenciamentoRouteImport.update({
+    id: '/credenciamento',
+    path: '/credenciamento',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -93,7 +106,9 @@ export interface FileRoutesByFullPath {
   '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin': typeof AuthenticatedAdminRouteRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/admin/credenciamento': typeof AuthenticatedAdminCredenciamentoRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -106,7 +121,8 @@ export interface FileRoutesByTo {
   '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/admin': typeof AuthenticatedAdminRouteRoute
+  '/admin/credenciamento': typeof AuthenticatedAdminCredenciamentoRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -121,7 +137,9 @@ export interface FileRoutesById {
   '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRouteRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/_authenticated/admin/credenciamento': typeof AuthenticatedAdminCredenciamentoRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -137,6 +155,8 @@ export interface FileRouteTypes {
     | '/programacao'
     | '/sitemap.xml'
     | '/admin'
+    | '/admin/credenciamento'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -149,6 +169,7 @@ export interface FileRouteTypes {
     | '/parceiros'
     | '/programacao'
     | '/sitemap.xml'
+    | '/admin/credenciamento'
     | '/admin'
   id:
     | '__root__'
@@ -164,6 +185,8 @@ export interface FileRouteTypes {
     | '/programacao'
     | '/sitemap.xml'
     | '/_authenticated/admin'
+    | '/_authenticated/admin/credenciamento'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -266,15 +289,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/credenciamento': {
+      id: '/_authenticated/admin/credenciamento'
+      path: '/credenciamento'
+      fullPath: '/admin/credenciamento'
+      preLoaderRoute: typeof AuthenticatedAdminCredenciamentoRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminCredenciamentoRoute: typeof AuthenticatedAdminCredenciamentoRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminCredenciamentoRoute:
+      AuthenticatedAdminCredenciamentoRoute,
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRoute
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRoute,
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
