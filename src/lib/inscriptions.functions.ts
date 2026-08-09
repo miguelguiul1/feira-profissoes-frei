@@ -39,6 +39,8 @@ export interface InscriptionRow {
   course_interest: string;
   how_found_out: string | null;
   estimated_arrival: string | null;
+  credential_code: string;
+  checked_in_at: string | null;
 }
 
 /**
