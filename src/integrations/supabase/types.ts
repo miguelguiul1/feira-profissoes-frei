@@ -16,8 +16,10 @@ export type Database = {
     Tables: {
       inscriptions: {
         Row: {
+          checked_in_at: string | null
           course_interest: string
           created_at: string
+          credential_code: string
           education_level: string
           email: string
           estimated_arrival: string | null
@@ -28,8 +30,10 @@ export type Database = {
           phone: string
         }
         Insert: {
+          checked_in_at?: string | null
           course_interest: string
           created_at?: string
+          credential_code?: string
           education_level: string
           email: string
           estimated_arrival?: string | null
@@ -40,8 +44,10 @@ export type Database = {
           phone: string
         }
         Update: {
+          checked_in_at?: string | null
           course_interest?: string
           created_at?: string
+          credential_code?: string
           education_level?: string
           email?: string
           estimated_arrival?: string | null
