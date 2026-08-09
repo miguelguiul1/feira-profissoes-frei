@@ -93,7 +93,7 @@ export const listInscriptions = createServerFn({ method: "GET" })
     const { data, error } = await context.supabase
       .from("inscriptions")
       .select(
-        "id, created_at, full_name, phone, email, education_level, is_former_student, course_interest, how_found_out, estimated_arrival",
+        "id, created_at, full_name, phone, email, education_level, is_former_student, course_interest, how_found_out, estimated_arrival, credential_code, checked_in_at",
       )
       .order("created_at", { ascending: false });
 
@@ -102,4 +102,41 @@ export const listInscriptions = createServerFn({ method: "GET" })
       throw new Error("Não foi possível carregar as inscrições.");
     }
     return (data ?? []) as InscriptionRow[];
+  });
+
+/**
+ * Credenciamento manual (base para a etapa de QR Code): marca ou desfaz o
+ * check-in de um visitante. Exige sessão válida e papel admin/staff.
+ */
+export const setInscriptionCheckIn = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z.object({ id: z.string().uuid(), checked_in: z.boolean() }).parse(input),
+  )
+  .handler(async ({ data, context }): Promise<{ checked_in_at: string | null }> => {
+    const [admin, staff] = await Promise.all([
+      context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" }),
+      context.supabase.rpc("has_role", { _user_id: context.userId, _role: "staff" }),
+    ]);
+
+    if (admin.error || staff.error) {
+      console.error("[inscriptions] role check failed", admin.error ?? staff.error);
+      throw new Error("Não foi possível validar suas permissões.");
+    }
+    if (!admin.data && !staff.data) {
+      throw new Error("Acesso negado.");
+    }
+
+    const checkedInAt = data.checked_in ? new Date().toISOString() : null;
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin
+      .from("inscriptions")
+      .update({ checked_in_at: checkedInAt })
+      .eq("id", data.id);
+
+    if (error) {
+      console.error("[inscriptions] check-in failed", error);
+      throw new Error("Não foi possível atualizar o credenciamento.");
+    }
+    return { checked_in_at: checkedInAt };
   });
