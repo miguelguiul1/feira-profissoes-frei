@@ -94,7 +94,18 @@ export function VisitorDetailSheet({
                 )}
                 {visitor.checked_in_at ? "Desfazer credenciamento" : "Credenciar visitante"}
               </Button>
+
+              <Button
+                variant="outline"
+                className="w-full rounded-full"
+                onClick={() => setQrOpen(true)}
+              >
+                <QrCode className="h-4 w-4" aria-hidden="true" />
+                Ver QR Code
+              </Button>
             </div>
+
+            <QrCodeDialog visitor={visitor} open={qrOpen} onOpenChange={setQrOpen} />
           </>
         ) : null}
       </SheetContent>
