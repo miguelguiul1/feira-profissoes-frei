@@ -1,4 +1,5 @@
-import { CheckCircle2, Loader2, RotateCcw } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle2, Loader2, QrCode, RotateCcw } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -8,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { QrCodeDialog } from "@/components/admin/qr-code-dialog";
 import type { InscriptionRow } from "@/lib/inscriptions.functions";
 
 function Field({ label, value }: { label: string; value: string }) {
