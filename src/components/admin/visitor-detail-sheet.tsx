@@ -37,6 +37,8 @@ export function VisitorDetailSheet({
   onToggleCheckIn: (visitor: InscriptionRow) => void;
   pending: boolean;
 }) {
+  const [qrOpen, setQrOpen] = useState(false);
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full overflow-y-auto sm:max-w-md">
