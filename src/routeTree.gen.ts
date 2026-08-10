@@ -21,6 +21,7 @@ import { Route as ParceirosRouteImport } from './routes/parceiros'
 import { Route as ProgramacaoRouteImport } from './routes/programacao'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as CredencialCodeRouteImport } from './routes/credencial.$code'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminCredenciamentoRouteImport } from './routes/_authenticated/admin/credenciamento'
 
@@ -83,6 +84,11 @@ const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const CredencialCodeRoute = CredencialCodeRouteImport.update({
+  id: '/credencial/$code',
+  path: '/credencial/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -107,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/programacao': typeof ProgramacaoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/credencial/$code': typeof CredencialCodeRoute
   '/admin/credenciamento': typeof AuthenticatedAdminCredenciamentoRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/parceiros': typeof ParceirosRoute
   '/programacao': typeof ProgramacaoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/credencial/$code': typeof CredencialCodeRoute
   '/admin/credenciamento': typeof AuthenticatedAdminCredenciamentoRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/programacao': typeof ProgramacaoRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/credencial/$code': typeof CredencialCodeRoute
   '/_authenticated/admin/credenciamento': typeof AuthenticatedAdminCredenciamentoRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/programacao'
     | '/sitemap.xml'
     | '/admin'
+    | '/credencial/$code'
     | '/admin/credenciamento'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/parceiros'
     | '/programacao'
     | '/sitemap.xml'
+    | '/credencial/$code'
     | '/admin/credenciamento'
     | '/admin'
   id:
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/programacao'
     | '/sitemap.xml'
     | '/_authenticated/admin'
+    | '/credencial/$code'
     | '/_authenticated/admin/credenciamento'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   ParceirosRoute: typeof ParceirosRoute
   ProgramacaoRoute: typeof ProgramacaoRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  CredencialCodeRoute: typeof CredencialCodeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -289,6 +302,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/credencial/$code': {
+      id: '/credencial/$code'
+      path: '/credencial/$code'
+      fullPath: '/credencial/$code'
+      preLoaderRoute: typeof CredencialCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
       path: '/'
@@ -346,6 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   ParceirosRoute: ParceirosRoute,
   ProgramacaoRoute: ProgramacaoRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  CredencialCodeRoute: CredencialCodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

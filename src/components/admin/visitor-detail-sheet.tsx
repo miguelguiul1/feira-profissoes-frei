@@ -1,4 +1,5 @@
-import { CheckCircle2, Loader2, RotateCcw } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle2, Loader2, QrCode, RotateCcw } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -8,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { QrCodeDialog } from "@/components/admin/qr-code-dialog";
 import type { InscriptionRow } from "@/lib/inscriptions.functions";
 
 function Field({ label, value }: { label: string; value: string }) {
@@ -35,6 +37,8 @@ export function VisitorDetailSheet({
   onToggleCheckIn: (visitor: InscriptionRow) => void;
   pending: boolean;
 }) {
+  const [qrOpen, setQrOpen] = useState(false);
+
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full overflow-y-auto sm:max-w-md">
@@ -90,7 +94,18 @@ export function VisitorDetailSheet({
                 )}
                 {visitor.checked_in_at ? "Desfazer credenciamento" : "Credenciar visitante"}
               </Button>
+
+              <Button
+                variant="outline"
+                className="w-full rounded-full"
+                onClick={() => setQrOpen(true)}
+              >
+                <QrCode className="h-4 w-4" aria-hidden="true" />
+                Ver QR Code
+              </Button>
             </div>
+
+            <QrCodeDialog visitor={visitor} open={qrOpen} onOpenChange={setQrOpen} />
           </>
         ) : null}
       </SheetContent>
