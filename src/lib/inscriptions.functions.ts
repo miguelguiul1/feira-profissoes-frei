@@ -140,3 +140,38 @@ export const setInscriptionCheckIn = createServerFn({ method: "POST" })
     }
     return { checked_in_at: checkedInAt };
   });
+
+/** Busca um visitante pelo código único do QR Code. Exige sessão e papel admin/staff. */
+export const findInscriptionByCredential = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z.object({ credential_code: z.string().uuid() }).parse(input),
+  )
+  .handler(async ({ data, context }): Promise<InscriptionRow | null> => {
+    const [admin, staff] = await Promise.all([
+      context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" }),
+      context.supabase.rpc("has_role", { _user_id: context.userId, _role: "staff" }),
+    ]);
+
+    if (admin.error || staff.error) {
+      console.error("[inscriptions] role check failed", admin.error ?? staff.error);
+      throw new Error("Não foi possível validar suas permissões.");
+    }
+    if (!admin.data && !staff.data) {
+      throw new Error("Acesso negado.");
+    }
+
+    const { data: row, error } = await context.supabase
+      .from("inscriptions")
+      .select(
+        "id, created_at, full_name, phone, email, education_level, is_former_student, course_interest, how_found_out, estimated_arrival, credential_code, checked_in_at",
+      )
+      .eq("credential_code", data.credential_code)
+      .maybeSingle();
+
+    if (error) {
+      console.error("[inscriptions] credential lookup failed", error);
+      throw new Error("Não foi possível localizar o visitante.");
+    }
+    return (row as InscriptionRow | null) ?? null;
+  });
