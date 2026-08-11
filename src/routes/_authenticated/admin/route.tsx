@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { LogOut, QrCode, Users } from "lucide-react";
+import { LayoutDashboard, LogOut, QrCode, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 
@@ -9,6 +9,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
 });
 
 const NAV = [
+  { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard, exact: false },
   { to: "/admin", label: "Visitantes", icon: Users, exact: true },
   { to: "/admin/credenciamento", label: "Credenciamento", icon: QrCode, exact: false },
 ] as const;
